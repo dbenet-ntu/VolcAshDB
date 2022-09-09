@@ -1,3 +1,4 @@
 back-end/images/*
 node_modules
 back-end/uploads/*
+back-end/optimizedImages.zip
