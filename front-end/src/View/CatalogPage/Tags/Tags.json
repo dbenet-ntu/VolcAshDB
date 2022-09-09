@@ -1,0 +1,48 @@
+{
+   "volcanoName": {
+      "id":1,
+      "oriTag": "Volcano Name",
+      "choices": ["Pinatubo","Taal"]
+   },
+  "mainType": {
+    "id": 2,
+    "oriTag": "Main Type",
+    "choices":["Free Crystal","Altered Material","Lithic","Juvenile"]
+  },
+  "freeCrystalType" :{
+    "id" : 3,
+    "oriTag": "Free Crystal Type",
+    "choices": ["Plagioclase","Pyroxene", "Amfibole","Sulfide","Olivine","Others"]},
+  "alteredMaterialType" :{
+    "id":4,
+    "oriTag": "Altered Material Type",
+    "choices":["Weathered Material", "Hydrothermally Altered Material"]},
+  "juvenileType" :{
+    "id":5,
+    "oriTag": "Juvenile Type",
+    "choices":["Standard Juvenile","Hydrothermally Altered Juvenile"]},
+  "lithicType" :{
+    "id":6,
+    "oriTag": "Lithic Type",
+    "choices":["Standard Lithic","Recycled Juvenile"]},
+  "color" :{
+    "id":7,
+    "oriTag": "Color",
+    "choices":["Black","Transparent"]},
+  "crystallinity" :{
+    "id": 8,
+    "oriTag": "Crystallinity",
+    "choices":["Low Crystallinity","Mid Crystallinity","High Crystallinity"]},
+  "hydroAlterDegree" :{
+    "id":9,
+    "oriTag": "Hydrothermally Alteration Degree",
+    "choices":["None", "Slight", "Moderate","High"]},
+  "shape" :{
+    "id": 10,
+    "oriTag": "Shape",
+    "choices":["Blocky", "Fluidal", "Microtubular","Highly vesicular","Spongy","Pumice","Aggregate"]},
+  "eruptiveStyle" :{
+    "id": 11,
+    "oriTag": "Eruptive Style",
+    "choices":["Subplinian", "Phreatic", "Dome explosion","Lava fountaining","Spongy","Plinian","Phreatic historical"]}
+}

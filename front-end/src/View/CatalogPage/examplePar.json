@@ -1,0 +1,538 @@
+[
+  {
+    "_id": {
+      "$oid": "62fa4d1de57f188170ed78df"
+    },
+    "volc_num": 273083,
+    "volc_name": "Pinatubo",
+    "afe_code": "PIN_3_DB1",
+    "sample_id": 1,
+    "id": 21,
+    "instrument": "binocular",
+    "imgURL": "uploads\\1660570757672_PI-DB1_01_2_21_mf_5x_phi0phi1_AMF.png",
+    "gsLow": 0,
+    "gsUp": 1,
+    "multi_focus": true,
+    "magnification": 5,
+    "main_type": "free crystal",
+    "sub_type": "amfibole",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1660570909677"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1660654741596"
+      }
+    },
+    "__v": 0,
+    "eruptive_style": "Phreatic",
+    "asm": 0.523927312,
+    "aspect_rat": 0.926595745,
+    "blue_mean": 126.9109387,
+    "blue_mode": 127,
+    "blue_std": 42.80192238,
+    "circ_rect": 3.261664763,
+    "circularity": 2.159758768,
+    "comp_elon": 1.078371884,
+    "compactness": 0.623417598,
+    "contrast": 0.068815803,
+    "convexity": 0.711235746,
+    "correlation": 0.99737905,
+    "dissimilarity": 0.057456219,
+    "eccentricity_ellipse": 0.390672291,
+    "eccentricity_moments": 0.350113201,
+    "elongation": 1.729774532,
+    "energy": 0.723828157,
+    "green_mean": 125.5667137,
+    "green_mode": 127,
+    "green_std": 44.200692,
+    "homogeneity": 0.972160541,
+    "rect_comp": 0.941484412,
+    "rectangularity": 1.510198644,
+    "red_mean": 125.3122715,
+    "red_mode": 127,
+    "red_std": 44.16503977,
+    "roundness": 0.736072547,
+    "solidity": 0.913397233
+  },
+  {
+    "_id": {
+      "$oid": "62fa3de37b796e5f1cd083cf"
+    },
+    "volc_num": 263250,
+    "volc_name": "Merapi",
+    "afe_code": "MEA_22post_DB1",
+    "sample_id": 1,
+    "id": 5,
+    "instrument": "binocular",
+    "imgURL": "uploads\\1660566923352_ME-DB1_01_1_5_mf_5x_phi0phi1_LLtrmcn.png",
+    "gsLow": 0,
+    "gsUp": 1,
+    "multi_focus": true,
+    "magnification": 5,
+    "main_type": "lithic",
+    "crystallinity": "mid crystallinity",
+    "color": "transparent",
+    "hydro_alter_degree": "none",
+    "sub_type": "standard lithic",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1660567011608"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1660654741574"
+      }
+    },
+    "__v": 0,
+    "eruptive_style": "Dome explosion",
+    "asm": 0.376477259,
+    "aspect_rat": 1.092703349,
+    "blue_mean": 89.78177348,
+    "blue_mode": 80,
+    "blue_std": 23.76492305,
+    "circ_rect": 44.86337057,
+    "circularity": 8.413530476,
+    "comp_elon": 1.203200065,
+    "compactness": 0.512743625,
+    "contrast": 0.069416711,
+    "convexity": 0.167214654,
+    "correlation": 0.995391255,
+    "dissimilarity": 0.057408753,
+    "eccentricity_ellipse": 0.50246123,
+    "eccentricity_moments": 0.515708144,
+    "elongation": 2.346591957,
+    "energy": 0.613576562,
+    "green_mean": 91.51836953,
+    "green_mode": 84,
+    "green_std": 24.3094305,
+    "homogeneity": 0.972280276,
+    "rect_comp": 2.734096857,
+    "rectangularity": 5.332288353,
+    "red_mean": 92.1493029,
+    "red_mode": 86,
+    "red_std": 24.25423032,
+    "roundness": 0.542590944,
+    "solidity": 0.648776016
+  },
+  {
+    "_id": {
+      "$oid": "62fa5183e57f188170ed8ca3"
+    },
+    "volc_num": 261090,
+    "volc_name": "Toba",
+    "afe_code": "TOB_0_DB1",
+    "sample_id": 1,
+    "id": 46,
+    "instrument": "binocular",
+    "imgURL": "uploads\\1660572002311_TO-DB1_01_1_46_mf_5x_phi0phi1_PG.png",
+    "gsLow": 0,
+    "gsUp": 1,
+    "multi_focus": true,
+    "magnification": 5,
+    "main_type": "free crystal",
+    "sub_type": "plagioclase",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1660572035918"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1660654741489"
+      }
+    },
+    "__v": 0,
+    "eruptive_style": "Plinian",
+    "asm": 0.45390146,
+    "aspect_rat": 1.018229167,
+    "blue_mean": 220.1586227,
+    "blue_mode": 254,
+    "blue_std": 27.21338891,
+    "circ_rect": 3.417188937,
+    "circularity": 2.284922845,
+    "comp_elon": 1.254019736,
+    "compactness": 0.546302708,
+    "contrast": 0.058304136,
+    "convexity": 0.747924328,
+    "correlation": 0.999269533,
+    "dissimilarity": 0.036697202,
+    "eccentricity_ellipse": 0.742915042,
+    "eccentricity_moments": 0.732262221,
+    "elongation": 2.295466814,
+    "energy": 0.673721876,
+    "green_mean": 218.5466304,
+    "green_mode": 254,
+    "green_std": 27.38125274,
+    "homogeneity": 0.983108902,
+    "rect_comp": 0.817016458,
+    "rectangularity": 1.495537998,
+    "red_mean": 216.761882,
+    "red_mode": 254,
+    "red_std": 27.80456465,
+    "roundness": 0.554675649,
+    "solidity": 0.906062309
+  },
+  {
+    "_id": {
+      "$oid": "62fa503ee57f188170ed86ff"
+    },
+    "volc_num": 360060,
+    "volc_name": "Soufrière Guadeloupe",
+    "afe_code": "SOG_6_DB1",
+    "sample_id": 3,
+    "id": 48,
+    "instrument": "binocular",
+    "imgURL": "uploads\\1660571603233_SG-DB1_3_03_48_mf_5x_phi0phi1_AW.png",
+    "gsLow": 0,
+    "gsUp": 1,
+    "multi_focus": true,
+    "magnification": 5,
+    "main_type": "altered material",
+    "sub_type": "weathered material",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1660571710815"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1660654741592"
+      }
+    },
+    "__v": 0,
+    "eruptive_style": "Phreatic",
+    "asm": 0.516084293,
+    "aspect_rat": 1.154002026,
+    "blue_mean": 158.3790502,
+    "blue_mode": 163,
+    "blue_std": 15.76055937,
+    "circ_rect": 2.895031056,
+    "circularity": 2.001937716,
+    "comp_elon": 1.16479011,
+    "compactness": 0.667732914,
+    "contrast": 0.051650451,
+    "convexity": 0.766689973,
+    "correlation": 0.998781265,
+    "dissimilarity": 0.031770033,
+    "eccentricity_ellipse": 0.530045378,
+    "eccentricity_moments": 0.532946677,
+    "elongation": 1.744395229,
+    "energy": 0.718389834,
+    "green_mean": 168.0854549,
+    "green_mode": 173,
+    "green_std": 15.22557137,
+    "homogeneity": 0.985643499,
+    "rect_comp": 0.965618215,
+    "rectangularity": 1.446114448,
+    "red_mean": 175.2459784,
+    "red_mode": 181,
+    "red_std": 15.08900957,
+    "roundness": 0.729903134,
+    "solidity": 0.960910514
+  },
+  {
+    "_id": {
+      "$oid": "62fa492fe57f188170ed6c5c"
+    },
+    "volc_num": 283040,
+    "volc_name": "On-take",
+    "afe_code": "ONT_10_DB1",
+    "sample_id": 1,
+    "id": 3,
+    "instrument": "binocular",
+    "imgURL": "uploads\\1660569840353_ON-DB1_01_1_3_mf_5x_phi0phi1_AHh.png",
+    "gsLow": 0,
+    "gsUp": 1,
+    "multi_focus": true,
+    "magnification": 5,
+    "main_type": "altered material",
+    "hydro_alter_degree": "high",
+    "sub_type": "hydrothermally altered material",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1660569903187"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1660654741602"
+      }
+    },
+    "__v": 0,
+    "eruptive_style": "Phreatic",
+    "asm": 0.374617305,
+    "aspect_rat": 0.92224622,
+    "blue_mean": 205.4537563,
+    "blue_mode": 201,
+    "blue_std": 27.81901832,
+    "circ_rect": 2.108127237,
+    "circularity": 1.668459615,
+    "comp_elon": 1.249062439,
+    "compactness": 0.731140501,
+    "contrast": 0.082695451,
+    "convexity": 0.706990623,
+    "correlation": 0.998793311,
+    "dissimilarity": 0.050973592,
+    "eccentricity_ellipse": 0.4619557,
+    "eccentricity_moments": 0.452482798,
+    "elongation": 1.708375391,
+    "energy": 0.612059264,
+    "green_mean": 193.3732414,
+    "green_mode": 190,
+    "green_std": 25.42167068,
+    "homogeneity": 0.976667926,
+    "rect_comp": 0.923808518,
+    "rectangularity": 1.26351709,
+    "red_mean": 180.7597442,
+    "red_mode": 175,
+    "red_std": 23.19196369,
+    "roundness": 0.745292605,
+    "solidity": 0.950906207
+  },
+  {
+    "_id": {
+      "$oid": "62fa45e95301e8473016ea22"
+    },
+    "volc_num": 357070,
+    "volc_name": "Chillán, Nevados de",
+    "afe_code": "CIN_11_DB2",
+    "sample_id": 1,
+    "id": 82,
+    "instrument": "binocular",
+    "imgURL": "uploads\\1660568898816_NC-DB2_01_1_82_mf_5x_phi0phi1_AHm.png",
+    "gsLow": 0,
+    "gsUp": 1,
+    "multi_focus": true,
+    "magnification": 5,
+    "main_type": "altered material",
+    "hydro_alter_degree": "moderate",
+    "sub_type": "hydrothermally altered material",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1660569065355"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1660654741560"
+      }
+    },
+    "__v": 0,
+    "eruptive_style": "Dome explosion",
+    "asm": 0.354956078,
+    "aspect_rat": 0.968054211,
+    "blue_mean": 62.67026966,
+    "blue_mode": 53,
+    "blue_std": 20.59987739,
+    "circ_rect": 17.82047291,
+    "circularity": 4.833805676,
+    "comp_elon": 1.387399113,
+    "compactness": 0.740984981,
+    "contrast": 0.088525799,
+    "convexity": 0.252955889,
+    "correlation": 0.988485236,
+    "dissimilarity": 0.068795252,
+    "eccentricity_ellipse": 0.396016547,
+    "eccentricity_moments": 0.38456089,
+    "elongation": 1.872371435,
+    "energy": 0.595779948,
+    "green_mean": 64.60797697,
+    "green_mode": 58,
+    "green_std": 20.16889085,
+    "homogeneity": 0.967262884,
+    "rect_comp": 2.731740512,
+    "rectangularity": 3.686634116,
+    "red_mean": 73.24593673,
+    "red_mode": 71,
+    "red_std": 19.40493114,
+    "roundness": 0.680014404,
+    "solidity": 0.859388284
+  },
+  {
+    "_id": {
+      "$oid": "62fa4e28e57f188170ed8083"
+    },
+    "volc_num": 321050,
+    "volc_name": "St. Helens",
+    "afe_code": "STH_12post_DB1",
+    "sample_id": 1,
+    "id": 2,
+    "instrument": "binocular",
+    "imgURL": "uploads\\1660571114880_MS-DB1_01_1_2_mf_5x_phi0phi1_JJtrlcp.png",
+    "gsLow": 0,
+    "gsUp": 1,
+    "multi_focus": true,
+    "magnification": 5,
+    "main_type": "juvenile",
+    "crystallinity": "low crystallinity",
+    "color": "transparent",
+    "shape": "pumice",
+    "sub_type": "standard juvenile",
+    "createdAt": {
+      "$date": {
+        "$numberLong": "1660571176709"
+      }
+    },
+    "updatedAt": {
+      "$date": {
+        "$numberLong": "1660654741523"
+      }
+    },
+    "__v": 0,
+    "eruptive_style": "Plinian",
+    "asm": 0.407424405,
+    "aspect_rat": 1.022256332,
+    "blue_mean": 189.0396594,
+    "blue_mode": 191,
+    "blue_std": 23.71171004,
+    "circ_rect": 28.08606773,
+    "circularity": 6.811760811,
+    "comp_elon": 1.245410002,
+    "compactness": 0.46655609,
+    "contrast": 0.074337195,
+    "convexity": 0.24503023,
+    "correlation": 0.998936717,
+    "dissimilarity": 0.043010632,
+    "eccentricity_ellipse": 0.4246455,
+    "eccentricity_moments": 0.462350882,
+    "elongation": 2.669368224,
+    "energy": 0.638297383,
+    "green_mean": 200.1732907,
+    "green_mode": 208,
+    "green_std": 23.99551583,
+    "homogeneity": 0.980657835,
+    "rect_comp": 1.923691438,
+    "rectangularity": 4.123172922,
+    "red_mean": 209.8147599,
+    "red_mode": 215,
+    "red_std": 25.29539231,
+    "roundness": 0.476981607,
+    "solidity": 0.608154859
+  },
+  {
+  "_id": {
+    "$oid": "62fa3bd77b796e5f1cd07948"
+  },
+  "volc_num": 263280,
+  "volc_name": "Kelut",
+  "afe_code": "KEL_16_DB2",
+  "sample_id": 1,
+  "id": 4,
+  "instrument": "binocular",
+  "imgURL": "uploads\\1660566404472_KE-DB2_01_2_4_mf_5x_phi1phi2_JJtrlcp.png",
+  "gsLow": 1,
+  "gsUp": 2,
+  "multi_focus": true,
+  "magnification": 5,
+  "main_type": "juvenile",
+  "crystallinity": "low crystallinity",
+  "color": "transparent",
+  "shape": "pumice",
+  "sub_type": "standard juvenile",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1660566487961"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1660654741631"
+    }
+  },
+  "__v": 0,
+  "eruptive_style": "Subplinian",
+  "asm": 0.455880634,
+  "aspect_rat": 1.373292868,
+  "blue_mean": 130.3453606,
+  "blue_mode": 127,
+  "blue_std": 21.39537223,
+  "circ_rect": 15.32233424,
+  "circularity": 4.855547104,
+  "comp_elon": 1.489411174,
+  "compactness": 0.556271142,
+  "contrast": 0.121018396,
+  "convexity": 0.280710302,
+  "correlation": 0.997071678,
+  "dissimilarity": 0.066554814,
+  "eccentricity_ellipse": 0.711339435,
+  "eccentricity_moments": 0.719409926,
+  "elongation": 2.677491354,
+  "energy": 0.67518848,
+  "green_mean": 164.2676738,
+  "green_mode": 165,
+  "green_std": 19.9636059,
+  "homogeneity": 0.970595094,
+  "rect_comp": 1.75538867,
+  "rectangularity": 3.15563497,
+  "red_mean": 191.6630834,
+  "red_mode": 197,
+  "red_std": 20.70867684,
+  "roundness": 0.475534512,
+  "solidity": 0.796165551
+},
+{
+  "_id": {
+    "$oid": "62fa43385301e8473016d830"
+  },
+  "volc_num": 383010,
+  "volc_name": "La Palma",
+  "afe_code": "LAP_2_DB1",
+  "sample_id": 1,
+  "id": 2,
+  "instrument": "binocular",
+  "imgURL": "uploads\\1660568204284_CV-DB1_01_1_2_mf_5x_phi0phi1_JJtrlcf.png",
+  "gsLow": 0,
+  "gsUp": 1,
+  "multi_focus": true,
+  "magnification": 5,
+  "main_type": "juvenile",
+  "crystallinity": "low crystallinity",
+  "color": "transparent",
+  "shape": "fluidal",
+  "sub_type": "standard juvenile",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1660568376280"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1660654741628"
+    }
+  },
+  "__v": 0,
+  "eruptive_style": "Lava fountaining",
+  "asm": 0.395165604,
+  "aspect_rat": 0.986270023,
+  "blue_mean": 55.70534214,
+  "blue_mode": 37,
+  "blue_std": 28.8569247,
+  "circ_rect": 24.88522363,
+  "circularity": 5.944845182,
+  "comp_elon": 1.345790843,
+  "compactness": 0.631321367,
+  "contrast": 0.103550019,
+  "convexity": 0.218918332,
+  "correlation": 0.98664454,
+  "dissimilarity": 0.081955827,
+  "eccentricity_ellipse": 0.48461996,
+  "eccentricity_moments": 0.406228096,
+  "elongation": 2.131704886,
+  "energy": 0.628620925,
+  "green_mean": 60.45081234,
+  "green_mode": 47,
+  "green_std": 29.8169154,
+  "homogeneity": 0.960925583,
+  "rect_comp": 2.642722044,
+  "rectangularity": 4.186017108,
+  "red_mean": 67.36924093,
+  "red_mode": 53,
+  "red_std": 30.21770482,
+  "roundness": 0.597286966,
+  "solidity": 0.782967147
+}
+]
