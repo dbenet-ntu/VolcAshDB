@@ -1,16 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { volcanoStyle } from "./volcanoCard.style";
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import * as constants from '../../../Constants'
 export default function VolcanoCard({info,type}) {
-    const navigate = useNavigate()
     const proxy = constants.PROXY
     const classes=volcanoStyle();
     const imgPath = "images/optimizedImages" + info.imgURL.slice(7)
-    const routeChange = (name) =>{
-      let path = `/par_gral/par_gralDetailPage`+'/'+name;
-      navigate(path)
-    }
   return (
     <div className={classes.container}>
       {type=="Volcanoes"? 
@@ -24,7 +18,7 @@ export default function VolcanoCard({info,type}) {
           </a>
           <div className={classes.name}>{info.volc_name}</div>
         </div>:
-        <div onClick = {() =>{return routeChange(info.volc_name)}}>
+        <div>
           <LazyLoadImage
           style={{width:"100%" ,height:"200px"}}
           className={classes.poster}

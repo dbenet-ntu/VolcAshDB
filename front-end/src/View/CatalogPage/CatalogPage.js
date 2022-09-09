@@ -265,41 +265,43 @@ function CatalogPage() {
           tags={tags}
           setTags={setTags}
         />
+      </div>
+      <div style={{marginLeft:"1000px", marginTop:"-15px", marginBottom:"10px"}}>
         <Button variant='contained' style={{backgroundColor:"#388e3c", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:30, borderRadius:"20px", color:"white"}} onClick={()=>handleSubmit(searchTerm.toLowerCase())}> Apply Filters</Button>
-        <Button 
-          id="demo-positioned-button"
-          aria-controls="demo-positioned-menu"
-          aria-haspopup="true"
-          aria-expanded={open ? 'true' : undefined}
-          variant='contained' 
-          style={{backgroundColor:"#f57c00", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:20, borderRadius:"20px", color:"white"}} 
-          onClick={handleOpenDownloadMenu}
-        > 
-          Download Images
-        </Button>
-        <Menu
-          id="demo-positioned-menu"
-          aria-labelledby="demo-positioned-button"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleCloseDownloadMenu}
-          style={{top:"45px", left:"20px"}}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-        >
-        {filterSubmit.length!=0?downloadOptions.map((option)=>
-        <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>
-          ):downloadOptions.map((option,index)=>
-          index>1?
-          <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>:null)}
-        </Menu>
-        {isPreparingDownload?<CircularProgress style={{marginTop:"15px",marginLeft:"15px"}} />:null}
+          <Button 
+            id="demo-positioned-button"
+            aria-controls="demo-positioned-menu"
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            variant='contained' 
+            style={{backgroundColor:"#f57c00", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:20, borderRadius:"20px", color:"white"}} 
+            onClick={handleOpenDownloadMenu}
+          > 
+            Download Images
+          </Button>
+          <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleCloseDownloadMenu}
+            style={{top:"45px", left:"20px"}}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+          {filterSubmit.length!=0?downloadOptions.map((option)=>
+          <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>
+            ):downloadOptions.map((option,index)=>
+            index>1?
+            <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>:null)}
+          </Menu>
+          {isPreparingDownload?<CircularProgress style={{marginTop:"15px",marginLeft:"15px"}} />:null}
       </div>
       {filterSubmit.length!=0 && !isLoading?(
         <Typography style={{ marginLeft: 25, paddingBottom: 20 }}>

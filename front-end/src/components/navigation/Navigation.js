@@ -9,7 +9,10 @@ import {Link} from "react-router-dom"
 export default function Navigation() {
   const classes = NavigationStyles();
   const navigate = useNavigate();
-
+  function changeLocation(placeToGo){
+    navigate(placeToGo, { replace: true });
+    window.location.reload();
+  }
   return (
     <>
     <AppBar position='static'>
@@ -19,28 +22,28 @@ export default function Navigation() {
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => navigate('/')}
+            onClick={() => changeLocation('/')}
           >   
             Home
           </Button>
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => navigate('/about')}
+            onClick={() => changeLocation('/about')}
           >
             About Us
           </Button>
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => navigate('/catalogue')}
+            onClick={() => changeLocation('/catalogue')}
           >
             Catalogue 
           </Button>
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => navigate('/analytic')}
+            onClick={() => changeLocation('/analytic')}
           >
             Analytic 
           </Button>

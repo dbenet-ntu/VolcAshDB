@@ -7,7 +7,6 @@ import Home from './View/HomePage/Home';
 import CataloguePage from './View/CatalogPage/CatalogPage.js';
 import NewDashBoard from './View/AnalyticPlots/NewDashBoard';
 import VolcanoDetailPage from './View/VolcanoDetailPage/VolcanoDetailPage';
-import GralParDetailPage from './View/Par_Gral_DetailPage/GralParDetailPage'
 function App() {
   const classes = AppStyles();
 
@@ -19,7 +18,6 @@ function App() {
         <main className={classes.main}>
           <Routes>
             <Route path="/volcano/:volc_name" element={<VolcanoDetailPage/>}/>
-            <Route path="/par_gral/par_gralDetailPage" element={<GralParDetailPage/>}/>
             <Route path={'/catalogue'} element={<CataloguePage/>}/>
             <Route path={'/analytic'} element={<NewDashBoard/>}/>
             <Route path={'/'} element={<Home/>}/>

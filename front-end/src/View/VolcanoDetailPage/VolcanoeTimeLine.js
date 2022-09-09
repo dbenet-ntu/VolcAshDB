@@ -323,7 +323,7 @@ volcanoes.map(volc=>(volc.volc_name == vol?(imgPath = volc.imgURL):null))
     return (
       <div>
             <div className="Row1">
-                <div className = "infoDisplay"> 
+                <div className = "infoDisplay" style={{marginTop:"50px"}}> 
                     <h1>Name: {vol}</h1>
                     <h1>Volcano Number: {volc_num}</h1>
                     <h1>Latest Eruption: {2022}</h1>
@@ -333,7 +333,7 @@ volcanoes.map(volc=>(volc.volc_name == vol?(imgPath = volc.imgURL):null))
                 </div>
             </div>
             <div>
-              <div>
+              <div style={{marginTop:"20px"}}>
                 <MenuDropDown onChangeGraph = {ChangeGraph} />
               </div>
                 {EruptionOption}

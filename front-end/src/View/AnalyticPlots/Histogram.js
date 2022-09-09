@@ -315,36 +315,40 @@ const Histogram = (props) =>{
 	return(
 		<div>
 
-<div className = 'DropDownHistogram'>
+<div style={{display:"flex", justifyContent:"space-between"}}>
 
-			<div className = 'histogramDropDown' style={{marginBottom:"20px"}}>
+			<div style={{marginBottom:"30px"}}>
 					<DropDownForHistogramMode onPassHistogramMode = {PassHistogramMode} />	
 				
 
 					{(histogramMode === 'Compare')?(
-						<div className= 'volcToCompare'>  
+						<div style={{display:"flex", marginTop:"10px"}}>
+							<div style={{marginRight:"50px"}}>  
 							<DropDownForHistogramEsential onPassHistogramEsential = {PassHistogramEsential} />
+							</div>
 							{(histogramEsential === 'Volcanoes')?(
 							<div className = 'eleToCompare'>
-							<DropDownForHistogramCompare onPassVolcToCompare1 = {PassVolcToCompare1} onGetVar = {getVar} />
-							<DropDownForHistogramCompare onPassVolcToCompare2 = {PassVolcToCompare2} onGetVar = {getVar} />
+								<div style={{marginRight:"20px"}}>
+									<DropDownForHistogramCompare onPassVolcToCompare1 = {PassVolcToCompare1} onGetVar = {getVar} />
+								</div>
+								<DropDownForHistogramCompare onPassVolcToCompare2 = {PassVolcToCompare2} onGetVar = {getVar} />
 							</div>
 							):(
 							<div className = 'eleToCompare'>
-								<DropDownForHistogramCompareEruptive onPassVolcToCompare1 = {PassVolcToCompare1} />
+								<div style={{marginRight:"20px"}}>
+									<DropDownForHistogramCompareEruptive onPassVolcToCompare1 = {PassVolcToCompare1} />
+								</div>
 								<DropDownForHistogramCompareEruptive onPassVolcToCompare2 = {PassVolcToCompare2} />
 							</div>
 							)}
 						</div>
-					):(
-						<div> </div>
-					)
+					):null
 	}
 
 			</div>
 
-		<div>
-				<DropDownBar onPassHistogramVariable = {PassHistogramVariable} onGetVariableData={GetVariableData}/>
+		<div  >
+				<DropDownBar  onPassHistogramVariable = {PassHistogramVariable} onGetVariableData={GetVariableData}/>
 		</div>
 		</div>
 <div onDoubleClick = {doubleClick}>

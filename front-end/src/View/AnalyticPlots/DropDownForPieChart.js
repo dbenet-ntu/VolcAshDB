@@ -60,7 +60,7 @@ const DropDownForPie = (props) => {
 
 
 	return(
-	<div class = 'dropdown'>
+	<div style={{marginBottom:"20px"}}>
 		<Dropdown  overlay={menu} placement="bottomCenter" arrow>
       		<Button >{title}</Button>
     		</Dropdown>

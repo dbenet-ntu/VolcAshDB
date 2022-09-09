@@ -160,18 +160,16 @@ function GetVariableData(){
 	console.log(data)
 		return(
 	<div>
-	<div className = 'binaryDropDown' style = {{marginTop:'20px', marginLeft:'-295px'}}>
-	<div >
+	<div style={{display:"flex", marginBottom:"30px", justifyContent:"space-between"}} >
 	
-			<DropDownForEssential onPassEssentialVariable = {PassEssentialVariable} onGetEssential = {()=>{return initialEssentialVariable }} />
-		</div>
+		<DropDownForEssential onPassEssentialVariable = {PassEssentialVariable} onGetEssential = {()=>{return initialEssentialVariable }} />
 
 		<div class='select' >
 			<div>
-			<DropDownBar className = 'dropdown' onPassVariableForY = {PassVariableForY} onGetVariableData={GetVariableData} onGetInitialData={() => { return [initialXAxis,initialYAxis,initialEssentialVariable] }}/>	
+			<DropDownBar  onPassVariableForY = {PassVariableForY} onGetVariableData={GetVariableData} onGetInitialData={() => { return [initialXAxis,initialYAxis,initialEssentialVariable] }}/>	
 			</div>
-			<div style = {{marginLeft:'20px'}}>
-			<DropDownBar className = 'dropdown' onPassVariableForX = {PassVariableForX} onGetVariableData={GetVariableData} onGetInitialData={() => {return [initialXAxis,initialYAxis,initialEssentialVariable] }}/>
+			<div style={{marginLeft:"20px"}}>
+			<DropDownBar  onPassVariableForX = {PassVariableForX} onGetVariableData={GetVariableData} onGetInitialData={() => {return [initialXAxis,initialYAxis,initialEssentialVariable] }}/>
 			</div>
 		</div>
 

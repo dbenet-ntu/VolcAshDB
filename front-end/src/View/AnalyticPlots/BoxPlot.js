@@ -56,8 +56,8 @@ const BoxPlot = (props) =>{
 
 	return(
 	<div >
-		<div style={{marginBottom:"20px", marginLeft:"-30px"}}>
-		<DropDownBar className = 'dropdown' onPassVariableForX = {PassVariableForX} onPassVariableForY = {PassVariableForY} onGetVariableData={GetVariableData} onGetInitialData={() => { return [initialXAxis,initialYAxis,initialEssentialVariable] }}/>
+		<div style={{marginBottom:"20px"}}>
+		<DropDownBar onPassVariableForX = {PassVariableForX} onPassVariableForY = {PassVariableForY} onGetVariableData={GetVariableData} onGetInitialData={() => { return [initialXAxis,initialYAxis,initialEssentialVariable] }}/>
 		</div>
 <div onDoubleClick = {doubleClick}>
 	<Plot

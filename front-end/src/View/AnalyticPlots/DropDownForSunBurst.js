@@ -51,7 +51,7 @@ const DropDownForSunBurst = (props) => {
 
 
 	return(
-	<div class = 'dropdown'>
+	<div style={{maginBottom:"20px", marginLeft:"30px"}}>
 		<Dropdown  overlay={menu} placement="bottomCenter" arrow>
       		<Button >{title}</Button>
     		</Dropdown>

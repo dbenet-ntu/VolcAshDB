@@ -1,13 +1,10 @@
-div {
-	display: block;
-	margin: auto;
-}
 
 
 
 .infoDisplay h1{
 	
 	color: white;
+	margin-left: 100px;
   	font-family: 'Courier New', Courier, monospace; 
   	text-align: left;
 	
@@ -15,6 +12,8 @@ div {
 
 .Row1{
 	display: flex;
+	justify-content: space-between;
+	align-content: center;
 	margin: auto;
 	background-image: url('../../assets/backGroundImage/header_background.jpeg');
 	border-radius: 10px;
@@ -31,6 +30,8 @@ div {
 }
 
 .giantImage img{
+	margin-top: 50px;
+	margin-right: 200px;
 	height: 150px;
 	width: 250px;
 	border: solid white 5px;

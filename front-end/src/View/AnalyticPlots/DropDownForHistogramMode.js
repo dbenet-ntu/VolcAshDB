@@ -81,7 +81,7 @@ const DropDownForHistogramMode = (props) => {
 
 
 	return(
-	<div class = 'dropdown'>
+	<div style={{maginBottom:"20px"}}>
 		<Dropdown  overlay={menu} placement="bottomCenter" arrow>
       		<Button >{title}</Button>
     		</Dropdown>

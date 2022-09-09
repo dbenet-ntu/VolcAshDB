@@ -40,13 +40,9 @@
 
 .select{
 	display:flex;
-	margin-left:-80px
 }
 
-.dropdown{	
-	padding-left:30px;
-	margin:0px;
-}
+
 
 .detailPlot2{
 	display:flex;
@@ -69,9 +65,9 @@
 	display:flex
 }
 
-.DropDownHistogram{
-	display: flex
-}
+/* .DropDownHistogram{
+	margin-bottom: 20px;
+} */
 
 .ternaryPlots{
 	display: flex;
@@ -112,17 +108,17 @@
 	display:flex
 }
 
-.histogramDropDown{
+/* .histogramDropDown{
 	display:flex;
 	margin-left:-30px
 
-}
+} */
 
 .eleToCompare{
 	display:flex;
 }
 
-.binaryDropDown{
+/* .binaryDropDown{
 	display:flex;
-}
+} */
 
