@@ -1,7 +1,5 @@
 import React from 'react';
 import { Chart, registerables } from 'chart.js';
-import { Scatter } from 'react-chartjs-2';
-import { reduce } from 'async';
 import Plot from 'react-plotly.js';
 import { useState } from 'react';
 import DropDownForPie from './DropDownForPieChart';

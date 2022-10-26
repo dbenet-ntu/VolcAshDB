@@ -302,6 +302,23 @@ router.get("/afes_by_id", (req, res) => {
           return res.status(200).send(afes)
       })
 });
+router.get("/afes_by_volcano",(req,res) => {
+  let volcano = req.query.volcano
+  Volcano.find({volc_name:volcano}, function(err,volc_found){
+    if(err){
+      res.status(400).send(err)
+    }else{
+      AFE.find({volc_num:volc_found[0].volc_num}, function(err,afe_found){
+        if(err){
+          res.status(400).send(err)
+        }else{
+          console.log(volc_found[0].volc_num)
+          res.status(200).send(afe_found)
+        }
+      })
+    }
+  })
+})
 router.get("/next_afe_code",async(req,res)=>{
   let ed_code = req.query.ed
   await AFE.find({afe_code:{$regex: ed_code }},function(err,afes){

@@ -82,9 +82,9 @@ const DropDownBar = (props) => {
 
 	return(
 	<div style={{maginBottom:"20px"}}>
-		<Dropdown  overlay={menu} placement="bottomCenter" arrow>
+		<Dropdown overlayStyle={{maxHeight:500,overflowY:"scroll"}} overlay={menu} placement="bottomCenter" arrow>
       		<Button >{title}</Button>
-    		</Dropdown>
+    	</Dropdown>
 	</div>
 	);
 	

@@ -17,7 +17,7 @@ export default function Navigation() {
     <>
     <AppBar position='static'>
       <Toolbar> 
-        <Link to="/" className={classes.navLogo}> Volcanic Ash <br/> DataBase </Link>
+        <Link to="/" className={classes.navLogo}> VolcashDB </Link>
         <div className={classes.navMenu}>
           <Button
             className={classes.navBtn}
@@ -31,7 +31,7 @@ export default function Navigation() {
             color='inherit'
             onClick={() => changeLocation('/about')}
           >
-            About Us
+            About VolcashDB
           </Button>
           <Button
             className={classes.navBtn}
@@ -45,7 +45,14 @@ export default function Navigation() {
             color='inherit'
             onClick={() => changeLocation('/analytic')}
           >
-            Analytic 
+            Plots 
+          </Button>
+          <Button
+            className={classes.navBtn}
+            color='inherit'
+            onClick={() => changeLocation('/contribute')}
+          >
+            Contribute 
           </Button>
         </div>
         

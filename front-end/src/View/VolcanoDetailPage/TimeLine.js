@@ -1,11 +1,6 @@
-import { Legend, Title } from 'chart.js';
 import React from 'react';
 import { Line, Chart } from 'react-chartjs-2'; 
-import DraggableBar from './DraggableUsage';
-import Draggable from 'react-draggable';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import {Button} from "antd"
 import {useState, useEffect} from 'react';
 import DragBox from './DragBox';
 import axios from 'axios';
@@ -306,20 +301,20 @@ const opt = {
   let moveButton;
   if(last === 1){
     moveButton = <div className = 'mButton'>
-      <h3 className = 'prevButton' onClick = {MovePrev} >prev</h3>
-      <h3 className = 'nextButton' ></h3>
+      <Button className = 'prevButton' onClick = {MovePrev} >prev</Button>
+      <Button className = 'nextButton' > next</Button>
     </div>
   }
   else if (first === 1){
     moveButton = <div className = 'mButton'>
-      <h3 className = 'prevButton' ></h3>
-      <h3 className = 'nextButton' onClick = {MoveForward} >next</h3>
+      <Button className = 'prevButton' ></Button>
+      <Button className = 'nextButton' onClick = {MoveForward} >next</Button>
     </div>
   }
   else{
     moveButton = <div className = 'mButton'>
-      <h3 className = 'prevButton' onClick = {MovePrev} >prev</h3>
-      <h3 className = 'nextButton' onClick = {MoveForward} >next</h3>
+      <Button className = 'prevButton' onClick = {MovePrev} >prev</Button>
+      <Button className = 'nextButton' onClick = {MoveForward} >next</Button>
     </div>
   }
 

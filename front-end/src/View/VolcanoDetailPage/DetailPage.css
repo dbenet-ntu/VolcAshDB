@@ -44,12 +44,12 @@
 }
 
 .nextButton {
-	width: 50%;
-	margin-left: 85%;
+	margin-top: 10px;
+	margin-left: 90%;
 }
 
 .prevButton {
-	width: 50%;
+	margin-top: 10px;
 	margin-left: 1.7%;
   	
 }

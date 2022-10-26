@@ -18,7 +18,7 @@ const particleSchema = new Schema({
     multi_focus:{type:Boolean},
     magnification:{type: Number},
     main_type: {type:String, enum:["free crystal","altered material","lithic","juvenile"]}, 
-    sub_type:{type: String, enum:["plagioclase","pyroxene", "amfibole","sulfide","olivine","others","recycled juvenile","hydrothermally altered juvenile","standard juvenile","weathered material", "hydrothermally altered material","standard lithic"]},
+    sub_type:{type: String, enum:["plagioclase","pyroxene", "amfibole","S-group mineral","olivine","others","recycled juvenile","hydrothermally altered juvenile","standard juvenile","weathered material", "hydrothermally altered material","standard lithic"]},
     color:{type:String, enum:["black", "transparent"]}, 
     crystallinity:{type:String, enum:["low","mid","high"]},
     hydro_alter_degree: {type:String, enum:["none", "slight","moderate","high"]}, 

@@ -7,6 +7,7 @@ import Home from './View/HomePage/Home';
 import CataloguePage from './View/CatalogPage/CatalogPage.js';
 import NewDashBoard from './View/AnalyticPlots/NewDashBoard';
 import VolcanoDetailPage from './View/VolcanoDetailPage/VolcanoDetailPage';
+import ContributePage from './View/ContributePage/ContributePage.js';
 function App() {
   const classes = AppStyles();
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/volcano/:volc_name" element={<VolcanoDetailPage/>}/>
             <Route path={'/catalogue'} element={<CataloguePage/>}/>
             <Route path={'/analytic'} element={<NewDashBoard/>}/>
+            <Route path={'/contribute'} element={<ContributePage/>}/>
             <Route path={'/'} element={<Home/>}/>
           </Routes>
         </main>

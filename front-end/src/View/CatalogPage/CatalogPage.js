@@ -16,7 +16,8 @@ import LoadingCard from './VolcanoCard/loadingCard';
 import stringSimilarity from 'string-similarity'
 import { saveAs } from 'file-saver';
 import * as constants from '../../Constants'
-const originalTags=['Volcano Name','Main Type','Free Crystal Type','Altered Material Type','Juvenile Type','Lithic Type','Color','Crystallinity','Hydrothermally Alteration Degree','Shape', 'Eruptive Style']
+import XLSX from 'xlsx'
+const originalTags=['Volcano Name',"Eruptions", 'Eruptive Style','Main Type','Shape','Crystallinity','Color','Hydrothermal Alteration Degree','Juvenile Type','Lithic Type','Altered Material Type','Free Crystal Type']
 function CatalogPage() {
   const proxy = constants.PROXY
   const examplePar = require("./examplePar.json")
@@ -161,13 +162,13 @@ function CatalogPage() {
     value: "Download Filtered Compressed Images"
   },{
     key:"filtered-original",
-    value: "Download Filtered Original Images (8x heavier)"
+    value: "Download Filtered Original Images (8x larger)"
   },{
     key:"all-compressed",
     value: "Download All Compressed Images"
   },{
     key:"all-original",
-    value: "Download All Original Images (8x heavier)"
+    value: "Download All Original Images (8x larger)"
   }]
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -177,19 +178,55 @@ function CatalogPage() {
   const handleCloseDownloadMenu = () => {
     setAnchorEl(null);
   };
+  const exportXLSXfile = ()=>{
+    var wb = XLSX.utils.book_new()
+    var trimmedParInfo = []
+    var id_counter = 1
+    searchData["Particles"].map(par=>{
+      const path = `Particles_Image/${id_counter}`+"."+par.imgURL.split(".")[1]
+      const newPar = {
+        "ID" : id_counter,
+        "Image Path": path,
+        "Volcano Name": par.volc_name,
+        "Volcano Number": par.volc_num,
+        "Grain Size LowerBound": par.gsLow,
+        "Grain Size UpperBound": par.gsUp,
+        "MultiFocus": par.multi_focus,
+        "Magnification": par.magnification,
+        "Main Type": par.main_type,
+        "Sub Type": par.sub_type
+      }
+      if(par.color) newPar["Color"] = par.color
+      if(par.crystallinity) newPar["Crystallinity"] = par.crystallinity
+      if(par.hydro_alter_degree) newPar["Hydrothermally Alteration Degree"] = par.hydro_alter_degree
+      if(par.shape) newPar["Shape"] = par.shape
+      newPar["Eruptive Style"] = par.eruptive_style
+      Object.keys(par).slice(-28).map(measurement =>{
+        newPar[measurement] = par[measurement]
+      })
+      trimmedParInfo.push(newPar)
+      id_counter++
+    })
+    var ws = XLSX.utils.json_to_sheet(trimmedParInfo)
+
+    XLSX.utils.book_append_sheet(wb,ws,"Particles")
+    var parInfo = XLSX.write(wb,{ type: "array", bookType: "xlsx" })
+    return parInfo
+  }
   var JSZip = require("jszip");
   let zip = new JSZip();
   async function chooseDownloadOption(option) {
+    const zip_name = filterSubmit.toLowerCase().split(/[\s,]+/).join("_")
+    console.log(zip_name)
     if(option == "all-compressed"){
       await saveAs(`${proxy}/images/testimages.zip`)
     }else if(option == "all-original"){
       await saveAs(`${proxy}/images/testimages.zip`)
     }else{
       let imgURLArray =[]
-      let dateString = Date.now().toString()
-      let photoZip
+      let photoZip    
       if(option=="filtered-compressed"){
-        photoZip = zip.folder(`compressed_images_${dateString}`);
+        photoZip = zip.folder(`compressed_${zip_name}`)
         let parArray
         if(filterSubmit.length!=0){
           parArray = searchData["Particles"]
@@ -197,11 +234,11 @@ function CatalogPage() {
           parArray = fetchedData["Particles"]
         }
         parArray.map(par=>{
-          let imgPath = "optimizedImages" + par.imgURL.slice(7)
+          let imgPath = "images/optimizedImages" + par.imgURL.slice(7)
           imgURLArray.push(`${imgPath}`) 
         })
       }else if(option == "filtered-original"){
-        photoZip = zip.folder(`original_images_${dateString}`);
+        photoZip = zip.folder(`original${zip_name}`)
         let parArray
         if(filterSubmit.length!=0){
           parArray = searchData["Particles"]
@@ -212,40 +249,44 @@ function CatalogPage() {
           imgURLArray.push(`${par.imgURL}`) 
         })
       }    
+      var id_counter = 1
       for (let i = 0; i < imgURLArray.length; i++) {                                                                                          
-        await DownloadImgFromURL(imgURLArray[i],photoZip); 
+        await DownloadImgFromURL(imgURLArray[i],photoZip,id_counter); 
+        id_counter++
       }
+      var parInfo = exportXLSXfile()
+      photoZip.file(`Particles_Info.xlsx`,parInfo)
       zip.generateAsync({type:"blob"})
             .then(function(content) {
-              if(option=="compressed"){
-                saveAs(content, `compressed_images_${dateString}`);
-              }else{
-                saveAs(content, `original_images_${dateString}`);
+              if(option=="filtered-compressed")
+                saveAs(content, `compresssed_${zip_name}`)
+              else{
+                saveAs(content, `original_${zip_name}`)
               }
             });
     }
     setIsPreparingDownload(false)
   }
 
-  async function DownloadImgFromURL(imgURL,photoZip) {
+  async function DownloadImgFromURL(imgURL,photoZip,id_counter) {
     const res = await fetch(`${proxy}/${imgURL}`);
     const imageBlob = await res.blob();
-    photoZip.file(imgURL.slice(8), imageBlob)
-
+    const directory = `Particles_Image/${id_counter}`+"."+imgURL.split(".")[1]
+    photoZip.file(directory, imageBlob)
   }
   return (
     <div className={classes.SearchContainer}>
       <Typography
         className={classes.SearchTitle}
       >
-        Explore our DataBase
+        Explore the Database
       </Typography>
       <div className={classes.SearchBoxContainer}>
       <input
         className={classes.SearchBox}
         value={searchTerm}
         onChange={handleChange}
-        placeholder="Search by Volcano Name, Particle Type or use our Tags"
+        placeholder="Search by Volcano Name, Particle Type, etc or click the tag(s) below"
         onKeyDown={handleKeyPress}
       ></input>
       <IconButton
@@ -301,7 +342,7 @@ function CatalogPage() {
             index>1?
             <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>:null)}
           </Menu>
-          {isPreparingDownload?<CircularProgress style={{marginTop:"15px",marginLeft:"15px"}} />:null}
+          {isPreparingDownload?<CircularProgress style={{marginLeft:"15px", marginBottom:"-20px"}} />:null}
       </div>
       {filterSubmit.length!=0 && !isLoading?(
         <Typography style={{ marginLeft: 25, paddingBottom: 20 }}>

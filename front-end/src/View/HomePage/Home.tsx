@@ -14,9 +14,9 @@ export default function Home(){
         <div className={classes.BodyContainer}>
             <div className={classes.BodyBg}></div>
             <div className={classes.BodyContent}>
-                <Typography className={classes.BodyText}>A volcanic ash database for monitoring and comparing</Typography>
+                <Typography className={classes.BodyText}>The web-based platform Volcanic ash DataBase</Typography>
                 <div className={classes.BodyBtn}>
-                    <Button className={classes.Btn} onClick={()=> navigate("/about")}> About Us</Button>
+                    <Button className={classes.Btn} onClick={()=> navigate("/about")}> About VolcashDB</Button>
                     <br/>
                 </div>
                 <br/>
@@ -30,7 +30,7 @@ export default function Home(){
                     <figure>
                         <img src = {picture3}alt = "Logo"/>
                         <br/>
-                        <Button className={classes.Btn} onClick={()=> navigate("/analytic")}> Analyze your own data!</Button>
+                        <Button style={{marginLeft:"55px"}} className={classes.Btn} onClick={()=> navigate("/analytic")}> Plots</Button>
                     </figure>
                     <br/>
                 </span>
