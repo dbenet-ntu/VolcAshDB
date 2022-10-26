@@ -2,3 +2,4 @@ back-end/images/*
 node_modules
 back-end/uploads/*
 front-end/src/Constants.js
+back-end/.env
