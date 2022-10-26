@@ -132,17 +132,21 @@ const Tags = ({
         res.data.map(afe=>{
           eruptions.push(`${afe.afe_code}: ${afe.afe_date.slice(0,10)}`)
         })
-        console.log(eruptions)
-        if(eruptions.length!=0){
-          let newTagList = tagList
-          newTagList[1].disabled = false
-          setTagList(newTagList)
-        }
-        newTagsData[eruptions].choices = eruptions
+        if(eruptions.length == 0) eruptions.push("No Eruptions Found")
+        newTagsData["eruptions"].choices = eruptions
         setTagsData(newTagsData)
       })
     }
   },[tagList])
+  // useEffect(()=>{
+  //   Popover1()
+  //   Popover2()
+  //   let newTagList = tagList
+  //   setTagList(newTagList)
+  // },[tagsData])
+  // useEffect(()=>{
+  //   console.log(tagsData["eruptions"])
+  // },[tagsData])
   const handleAdd = (choice,id, newTagList, newSelectedTags, newTags) => {
     newSelectedTags.push(choice)
     newTags.map((tag,index) =>{
@@ -168,8 +172,9 @@ const Tags = ({
     let newTags = [...tagsRef.current]
     if(id == 4){
       disabledLogic(choice, newTagList)
-    }
-    else{
+    }else if(id == 1){
+      newTagList[1].disabled = false
+    }else{
       if(!tagList[3].selected){
         switch(id){
           case 12: handleAdd("Free Crystal",4, newTagList, newSelectedTags, newTags); disabledLogic("Free Crystal", newTagList); break;
@@ -198,6 +203,10 @@ const Tags = ({
     let newTagList = [...tagListRef.current]
     let newSelectedTags = [...selectedTagsRef.current]
     let newTags = [...tagsRef.current]
+    if(id == 1){
+      handleRemove(newTagList[1].currentChoice,2,newTagList, newSelectedTags, newTags)
+      newTagList[1].disabled = true
+    }
     if(id == 4){
       newTagList[9].disabled = newTagList[8].disabled = newTagList[10].disabled = newTagList[11].disabled = false
       if(tagList[8].selected || tagList[9].selected || tagList[10].selected || tagList[11].selected){
@@ -243,7 +252,9 @@ const Tags = ({
               tagsData[taglabel].id==2?(
                     tagsData[taglabel].choices.map((t)=>(
                     <MenuItem onClick={() => {
-                      handleAddLogic(t,tagsData[taglabel].id);
+                      let afe_code = t.split(":")[0]
+                      console.log(afe_code)
+                      handleAddLogic(afe_code,tagsData[taglabel].id);
                       handleMenuClose(tagsData[taglabel].id)
                     }}> {t} </MenuItem>
                     ))):null)

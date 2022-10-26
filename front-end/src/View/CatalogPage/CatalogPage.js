@@ -22,7 +22,8 @@ function CatalogPage() {
   const proxy = constants.PROXY
   const examplePar = require("./examplePar.json")
   const classes = useStyles();
-  const [tags,setTags] = useState(originalTags)
+  00
+  co.nst [tags,setTags] = useState(originalTags)
   const [selectedTags,setSelectedTags] = useState([]);
   const [fetchedData, setFetchedData] = useState({})
   const [particles,setParticles] = useState([]);
@@ -219,9 +220,9 @@ function CatalogPage() {
     const zip_name = filterSubmit.toLowerCase().split(/[\s,]+/).join("_")
     console.log(zip_name)
     if(option == "all-compressed"){
-      await saveAs(`${proxy}/images/testimages.zip`)
+      await saveAs(`${proxy}/images/${constants.ORGINAL_ZIP}`)
     }else if(option == "all-original"){
-      await saveAs(`${proxy}/images/testimages.zip`)
+      await saveAs(`${proxy}/images/${constants.COMPRESSED_ZIP}`)
     }else{
       let imgURLArray =[]
       let photoZip    

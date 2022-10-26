@@ -10,8 +10,6 @@ import DropDownForEssentialVariable from '../NewAnalyticPlots/DropDownForEssenti
 import DropDownForSubType from './DropDownSubType';
 import TernaryPlot from './TernaryPlot';
 import Histogram from './Histogram';
-import ComparativePieChart from './ComparativePieChart';
-import BigComparativePieChart from './NewAnalyticPlots/BigComparativePieChart';
 import DropDownForTernary from './DropDownForTernary';
 const axios = require('axios')
 

@@ -30,6 +30,8 @@ export default function VolcanoCard({info,type}) {
             <p><span style={{fontWeight:700}}>ID: </span> {info.id}</p>
             {info.index?<p><span style={{fontWeight:700}}>Index: </span> {info.index}</p>:null}
             <p><span style={{fontWeight:700}}>Volcano Name: </span> {info.volc_name}</p>
+            {info.afe_code?<p><span style={{fontWeight:700}}>Eruption Code: </span> {info.afe_code}</p>:null}
+            {info.main_type?<p><span style={{fontWeight:700}}>Main Type: </span> {info.main_type}</p>:null}
             {info.main_type?<p><span style={{fontWeight:700}}>Main Type: </span> {info.main_type}</p>:null}
             {info.sub_type?<p><span style={{fontWeight:700}}>Sub Type: </span> {info.sub_type}</p>:null}
             {info.color?<p><span style={{fontWeight:700}}>Color: </span> {info.color}</p>:null}
