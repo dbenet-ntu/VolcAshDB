@@ -1,4 +1,0 @@
-documentation
-contribute page
-python package
-images repo
