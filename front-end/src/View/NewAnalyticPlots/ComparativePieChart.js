@@ -43,8 +43,7 @@ const ComparativePieChart = (props) =>{
 		lable.push(key);
 	}
 
-	// console.log(lable)
-	// console.log(v)
+
 	var allLabels = ['1st', '2nd', '3rd', '4th', '5th'];
 
 var allValues = [
@@ -115,7 +114,7 @@ for(let e in table){
 	count +=1;
 }
 
-console.log(table)
+
 
 var data = [{
   values: allValues[0],

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {
   Button,
@@ -17,13 +17,13 @@ import stringSimilarity from 'string-similarity'
 import { saveAs } from 'file-saver';
 import * as constants from '../../Constants'
 import XLSX from 'xlsx'
+import VolcanoDetailPage from '../VolcanoDetailPage/VolcanoDetailPage';
 const originalTags=['Volcano Name',"Eruptions", 'Eruptive Style','Main Type','Shape','Crystallinity','Color','Hydrothermal Alteration Degree','Juvenile Type','Lithic Type','Altered Material Type','Free Crystal Type']
 function CatalogPage() {
   const proxy = constants.PROXY
   const examplePar = require("./examplePar.json")
   const classes = useStyles();
-  00
-  co.nst [tags,setTags] = useState(originalTags)
+  const [tags,setTags] = useState(originalTags)
   const [selectedTags,setSelectedTags] = useState([]);
   const [fetchedData, setFetchedData] = useState({})
   const [particles,setParticles] = useState([]);
@@ -33,6 +33,7 @@ function CatalogPage() {
   const [filterSubmit, setFilterSubmit] = useState([]);
   const [searchData, setSearchData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const tagsRef = useRef(null) 
   const handleChange = (event) => {
     const value = event.target.value;
     setSearchTerm(value);
@@ -306,20 +307,23 @@ function CatalogPage() {
           setSelectedTags={setSelectedTags}   
           tags={tags}
           setTags={setTags}
+          ref={tagsRef}
         />
       </div>
+      {/* <button onClick={tagsRef.current.handleAdd("a")}></button> */}
       <div style={{marginLeft:"1000px", marginTop:"-15px", marginBottom:"10px"}}>
         <Button variant='contained' style={{backgroundColor:"#388e3c", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:30, borderRadius:"20px", color:"white"}} onClick={()=>handleSubmit(searchTerm.toLowerCase())}> Apply Filters</Button>
           <Button 
             id="demo-positioned-button"
             aria-controls="demo-positioned-menu"
+
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             variant='contained' 
             style={{backgroundColor:"#f57c00", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:20, borderRadius:"20px", color:"white"}} 
-            onClick={handleOpenDownloadMenu}
+            onClick={(event)=>handleOpenDownloadMenu(event)} //handleOpenDownloadMenu
           > 
-            Download Images
+            Download Images and Mesured Features
           </Button>
           <Menu
             id="demo-positioned-menu"
@@ -375,8 +379,8 @@ function CatalogPage() {
               style={{ marginBottom: 10 }}
             >
               Sorry! There is no result for "{filterSubmit}" in our database.
-              <br/>
-              <a href="/contribute/binocular" style={{textDecoration:"underline"}}>Help us expand our Database!</a>
+              {/* <br/>
+              <a href="/contribute/binocular" style={{textDecoration:"underline"}}>Help us expand our Database!</a> */}
             </Typography>
           )}
         </Typography>
@@ -415,13 +419,34 @@ function CatalogPage() {
         (searchData && Object.keys(searchData).map((key)=>
             key=="Volcanoes"?(searchData[key].length !=0?
             <div>
-              <h2 style={{fontWeight:700,fontSize:"1.8rem", marginBottom:"20px"}}>VOLCANO </h2>
-              <div style={{display: "flex",flexDirection:"row",flexWrap:"wrap"}}>
-                {searchData[key].map((ele)=>
-                <VolcanoCard
-                  info={ele}
-                  type={key}
-                />)}
+               <div style={{display: "flex",flexDirection:"row",flexWrap:"wrap"}}>
+
+              <div style ={{display:'flex'}}>
+                <div>
+                <h2 style={{fontWeight:700,fontSize:"1.8rem", marginBottom:"20px"}}>VOLCANO </h2>
+                <div style = {{display:'flex', marginLeft:'-30%'}}>
+                  <div  >
+                  {searchData[key].map((ele)=>
+                  <VolcanoCard
+                    tagsRef={tagsRef}
+                    selectedTags={selectedTags}
+                    handleSearch={()=>handleSubmit(searchTerm.toLowerCase())}
+                    info={ele}
+                    type={key}
+                  />)}
+                  </div>
+
+                </div>
+
+                </div>
+
+                <div style= {{width :'100%',marginTop:'-15px'}}>
+                    <VolcanoDetailPage onGetVolcano = {()=>{return searchData[key]}} tagsRef ={tagsRef} handleSearch={()=>handleSubmit(searchTerm.toLowerCase())} selectedTags={selectedTags}/>
+                    <p style={{color: "red", float:"right" }}> *Note: click on red dot in the Zoom In section to search for ash forming event.</p>
+                </div>
+              </div>
+             
+
               </div>
                 <hr
                 style={{
@@ -453,6 +478,9 @@ function CatalogPage() {
             <div style={{display: "flex",flexDirection:"row",flexWrap:"wrap"}}>
             {fetchedData[key].map((ele)=>
               <VolcanoCard
+                tagsRef={tagsRef}
+                selectedTags={selectedTags}
+                handleSearch={()=>handleSubmit(searchTerm.toLowerCase())}
                 info={ele}
                 type={key}
               />)}

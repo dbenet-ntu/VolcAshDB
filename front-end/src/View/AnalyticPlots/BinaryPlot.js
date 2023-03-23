@@ -35,13 +35,10 @@ const BinaryPlot = (props) =>{
 	// let variable = props.onGetVariable();
 	// let essentialVariable = props.onGetEssentialVariable(); 
 	// if(check == 0){
-		
-	// 	console.log(variable.label);
+
 	// 	setS(variable.label);
 	// 	setCheck(1);
 	// 	}
-
-	console.log(arr)
 
 
 function PassVariableForX(x){
@@ -80,8 +77,6 @@ function GetVariableData(){
 		essentialList[arr[i][essentialVariable]] = 1;
 	} 
 
-	console.log(essentialVariable)
-	console.log(JnShape)
 	for(const[key,value] of Object.entries(essentialList)){
 
 		dataListX[key] = []
@@ -97,8 +92,6 @@ function GetVariableData(){
 			dataListY[arr[i][essentialVariable]].push(arr[i][variable[1]])
 		}
 	}
-
-	console.log(dataListX)
 
 	for (const [key, value] of Object.entries(essentialList)){
 		let check = 0;
@@ -130,7 +123,6 @@ function GetVariableData(){
 	      }
 
 	      document.addEventListener('click', function handleClick(event) {
-		console.log('user clicked: ', event.target.parentNode.firstChild.textContent);
 	      if(event.target.classList.value === 'legendtoggle'){
 		      
 		    let t = event.target.parentNode.firstChild.textContent
@@ -156,8 +148,7 @@ function GetVariableData(){
 		
 		props.onPassZoomMode([xAxis,yAxis,essentialVariable],"binaryPlot");
 	}
-	
-	console.log(data)
+
 		return(
 	<div>
 	<div style={{display:"flex", marginBottom:"30px", justifyContent:"space-between"}} >

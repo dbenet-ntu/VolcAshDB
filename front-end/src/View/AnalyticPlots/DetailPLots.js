@@ -68,18 +68,15 @@ const DetailPlots = () =>{
 
 		axios.get(`${proxy}/volcanoes/getParticles`)
 		.then(data =>{
-			setParArray(data.data['particles']) 
-			console.log(data.data['particles'])
+			setParArray(data.data['particles'])
 		})
 		axios.get(`${proxy}/volcanoes/getVolcanoes`)
 		.then(data =>{
 			let vols = data.data['volcanoes']
 			let volT = {}
-			// console.log(data.data['volcanoes'])
 			for(let i=0;i < vols.length;i++){
 				volT[vols[i]['vd_num']] = vols[i]['vd_name']
 			}
-			console.log(volT)
 			setVolTable(volT)
 		})
 		
@@ -154,7 +151,6 @@ const getSunBurstDataVariable = () =>{
 }
 
 const PassZoomInBinaryPlot = (a) =>{
-        console.log(a)
 	setBinaryPlotZoomIn(<BinaryPlot onGetLegendSize = {() => {return 6} } onPassZoomMode={PassZoomMode} onPassZoomInBinaryPlot ={PassZoomInBinaryPlot} onGetEssentialVariable = {()=>{return a[2] }} onGetInitialYAxis = {() =>{ return a[1] }} onGetInitialXAxis = {() =>{return a[0] }}  onGetSide={() =>{return side }} onGetData = {getData} />)
 	setInitialBinaryXAxis(a[0]);
 	setInitialBinaryYAxis(a[1]);

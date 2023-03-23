@@ -40,9 +40,6 @@ const OverviewPieChart = (props) =>{
 		v.push(value);
 		lable.push(key);
 	}
-
-	// console.log(lable)
-	// console.log(v)
 	
 	return(
 	<div>

@@ -208,7 +208,6 @@ const SunBurst = (props) =>{
 		
 	}
 
-	console.log(dataDict)
 
 	// let finalData = {}	
 	// let main_type = 'main_type'
@@ -257,14 +256,12 @@ const SunBurst = (props) =>{
 	// }
 
 
-	// console.log(finalData)
 	
 
 
 	let v = []
 	let lable = []
-	
-	// console.log(dataDict)
+
 
 	for(const[key,value] of Object.entries(dict) ){
 		v.push(value);
@@ -323,7 +320,6 @@ const SunBurst = (props) =>{
 				}
 				else{
 				// if(c2 === 1 && a === 'Phreatic')
-				// 	console.log(k)
 				id2.splice(c2,0,k+va.count);
 				vv.splice(c2,0,va.count);
 				if(l11[key])
@@ -378,11 +374,7 @@ const SunBurst = (props) =>{
 					top3+=1;
 				}
 				top2 +=1;
-				if(a === 'Phreatic')
-				console.log(id2)
 			}
-				console.log(color3)
-				console.log(color4)
 						chartData.push({
 							values:v,
 							labels:id1,
@@ -468,8 +460,7 @@ const SunBurst = (props) =>{
 	
 	}
 
-	console.log(chartData)
-	console.log(r)
+
 
 	var data = [{
 		values: [16, 15, 12, 6, 5, 4, 42],
@@ -527,6 +518,7 @@ const SunBurst = (props) =>{
 		height: 1500,
 		width: 1440,
 		showlegend: false,
+		colorway:['#00395E','#FBAB18','#F05729','#7F131B','#B51C7D','#3B180D','#646765'],
 		grid: {rows: r+1, columns: 3}
 	      };
 	

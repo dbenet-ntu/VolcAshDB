@@ -1,14 +1,11 @@
 import { Chip } from "@material-ui/core";
 import { useState,useEffect } from "react";
 import { Menu,MenuItem,Popover } from "@material-ui/core";
-import { useRef } from "react";
+import { useRef, forwardRef,useImperativeHandle } from "react";
 import axios from "axios";
-const Tags = ({
-  selectedTags,
-  setSelectedTags,
-  tags,
-  setTags
-}) => {
+import * as constanst from "../../../Constants"
+const Tags = forwardRef((props,ref) => {
+  const proxy = constanst.PROXY
   const [tagList, setTagList] = useState([{
     anchorEl:null,
     oriTag: "Volcano Name",
@@ -111,8 +108,8 @@ const Tags = ({
   tagListRef.current=tagList
   const tagsRef=useRef({})
   const selectedTagsRef=useRef({})
-  tagsRef.current=tags
-  selectedTagsRef.current = selectedTags
+  tagsRef.current=props.tags
+  selectedTagsRef.current = props.selectedTags
   
   let data = require("./Tags.json")
   const volcList = require('./volcano2.json')
@@ -125,12 +122,16 @@ const Tags = ({
   const [tagsData, setTagsData] = useState(data)
   useEffect(()=>{
     if(tagList[0].selected){
-      axios.get(`/volcanoes/afes_by_volcano?volcano=${tagList[0].currentChoice}`)
+      axios.get(`${proxy}/volcanoes/afes_by_volcano?volcano=${tagList[0].currentChoice}`)
       .then(res=>{
         let newTagsData = tagsData
         let eruptions =[]
         res.data.map(afe=>{
-          eruptions.push(`${afe.afe_code}: ${afe.afe_date.slice(0,10)}`)
+          if(afe.yearsBP){
+            eruptions.push(`${afe.afe_code}: ${-afe.yearsBP} BP`)
+          }else{
+            eruptions.push(`${afe.afe_code}: ${afe.afe_date.slice(0,10)}`)
+          }
         })
         if(eruptions.length == 0) eruptions.push("No Eruptions Found")
         newTagsData["eruptions"].choices = eruptions
@@ -186,8 +187,8 @@ const Tags = ({
     }
     handleAdd(choice,id,newTagList, newSelectedTags, newTags)
     setTagList(newTagList)
-    setSelectedTags(newSelectedTags)
-    setTags(newTags)
+    props.setSelectedTags(newSelectedTags)
+    props.setTags(newTags)
   }
   const handleRemove = (choice,id, newTagList, newSelectedTags, newTags) => {
     newSelectedTags.map((selected,index) => {
@@ -220,8 +221,8 @@ const Tags = ({
     }
     handleRemove(choice,id, newTagList, newSelectedTags, newTags)
     setTagList(newTagList)
-    setSelectedTags(newSelectedTags)
-    setTags(newTags)
+    props.setSelectedTags(newSelectedTags)
+    props.setTags(newTags)
   }
   const handleOpenMenu = (event, _id)=>{
     var newTagList=[...tagListRef.current];
@@ -260,6 +261,79 @@ const Tags = ({
                     ))):null)
     );
   }
+  useImperativeHandle(ref, () => ({
+    handleAdd(choice,vol) {
+      let newTagList = [...tagListRef.current]
+      let newSelectedTags = [...selectedTagsRef.current]
+      let newTags = [...tagsRef.current]
+      if(newTagList[0].selected){
+        for(let i=0;i<newSelectedTags.length;i++){
+          if(newSelectedTags[i] == newTagList[0].currentChoice){
+            newSelectedTags.splice(i,1)
+          }
+        }
+      }
+      newSelectedTags.push(vol)
+      newTags.map((tag,index) =>{
+        if(tag == tagList[0].oriTag){
+          newTags.splice(index,1)
+        }
+      })
+      if(newTagList[1].selected){
+        for(let i=0;i<newSelectedTags.length;i++){
+          if(newSelectedTags[i] == newTagList[1].currentChoice){
+            newSelectedTags.splice(i,1)
+          }
+        }
+      }
+      newSelectedTags.push(choice)
+      newTags.map((tag,index) =>{
+        if(tag == tagList[1].oriTag){
+          newTags.splice(index,1)
+        }
+      })
+      newTagList[0].selected = true
+      newTagList[0].currentChoice = vol
+      newTagList[1].selected = true
+      newTagList[1].disabled = false
+      newTagList[1].currentChoice = choice
+      props.setSelectedTags(newSelectedTags)
+      setTagList(newTagList)
+      props.setTags(newTags)
+    },
+    handleAddVolcano(choice) {
+      let newTagList = [...tagListRef.current]
+      let newSelectedTags = [...selectedTagsRef.current]
+      let newTags = [...tagsRef.current]
+      if(newTagList[1].selected){
+        for(let i=0;i<newSelectedTags.length;i++){
+          if(newSelectedTags[i] == newTagList[1].currentChoice){
+            newSelectedTags.splice(i,1)
+          }
+        }
+      }
+      if(newTagList[0].selected){
+        for(let i=0;i<newSelectedTags.length;i++){
+          if(newSelectedTags[i] == newTagList[0].currentChoice){
+            newSelectedTags.splice(i,1)
+          }
+        }
+      }
+      newSelectedTags.push(choice)
+      newTags.map((tag,index) =>{
+        if(tag == tagList[0].oriTag){
+          newTags.splice(index,1)
+        }
+      })
+      newTagList[0].selected = true
+      newTagList[0].currentChoice = choice
+      newTagList[1].disabled = false
+      props.setSelectedTags(newSelectedTags)
+      setTagList(newTagList)
+      props.setTags(newTags)
+    }
+    
+  }));
   
   function Popover3() {
     return (
@@ -432,6 +506,6 @@ const Tags = ({
         
       </div>
     );
-  };
+  });
 
 export default Tags;

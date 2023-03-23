@@ -7,6 +7,8 @@ import App from './VolcanoeTimeLine';
 import { useNavigate} from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import * as constants from '../../Constants'
+import { useRef } from 'react';
+import Tags from '../CatalogPage/Tags/Tags';
 const axios = require('axios')
 const AFEtimeGraph = (props) =>{
 	const navigate = useNavigate()
@@ -48,7 +50,7 @@ const AFEtimeGraph = (props) =>{
 		  for(let i =0;i<12;i++){
 		    if(AFE[i]['volc_num'] === volc_num){
 		    let s = AFE[i]['afe_date'].substr(0,4) + '.' + AFE[i]['afe_date'].substr(5,7);
-		    a.push({x: parseFloat(s),y:5});
+		    a.push({x: parseFloat(s),y:5,code: AFE[i]["afe_code"]});
 		    }
 		}
 		  }
@@ -64,7 +66,6 @@ const AFEtimeGraph = (props) =>{
 
 
 	let TaalData = [];
-
 
 var pathArray = window.location.pathname.split('/');
 let vol =props.onGetVolcName();
@@ -87,8 +88,8 @@ for(let i=0;i<eruptions.length;i++){
 	  if(parseFloat(s) !== parseFloat(e)){
 	  Vol.push({s:parseFloat(s),e:parseFloat(e)})
 	  }
-	  else{
-	    Vol.push({s:parseFloat(s),e:parseFloat(e)+1})
+	  else{		  
+	//     Vol.push({s:parseFloat(s),e:parseFloat(e)})
 	  }
 
 	}
@@ -217,32 +218,33 @@ for(let i=0;i<Vol.length;i++){
 		
 	const AFEdata = {
 		labels: list,
-  datasets: [
+		datasets: [
 
-	{
-	label: 'Line Dataset',
-	data: zoomList,
-	fill: true,
-	showLine: false,
-	pointRadius: 0,
-	backgroundColor: 'rgba(0, 100, 0, 0.4)',
+			{
+			label: 'Line Dataset',
+			data: zoomList,
+			fill: true,
+			showLine: false,
+			pointRadius: 0,
+			backgroundColor: 'rgba(0, 100, 0, 0.4)',
 
-    },
-    {
-      position: 'Right',
-      fill: false,
-      lineTension: 0.5,
-      backgroundColor: 'red',
-      pointStyle: 'rectRot',
-      pointRadius: 5,
-      borderColor: 'rgba(0,0,0,1)',
-      borderWidth: 2,
-      data: AFEFilteredData,
-      showLine: false,
-      pointRadius: 5,
-    }
-  ],
+			},
+			{
+			position: 'Right',
+			fill: false,
+			lineTension: 0.5,
+			backgroundColor: '#7F131B',
+			pointStyle: 'rectRot',
+			
+			borderColor: 'rgba(0,0,0,1)',
+			borderWidth: 0,
+			data: AFEFilteredData,
+			showLine: false,
+			pointRadius: 6,
+			}
+  		],
 	}
+	const [flag,setFlag] = useState(null)
 	const opt = {maintainAspectRatio: false,
 		scales: {
 			y: {
@@ -277,12 +279,20 @@ for(let i=0;i<Vol.length;i++){
 			
 		    },
 		    onClick: function(evt, ele){
-			    if(ele.length >0)
-			    	routeChange();
+			    if(ele.length >0 ){
+					setFlag(1)
+					let choice = ele[0]["element"]["$context"]["raw"]["code"]
+					props.tagsRef.current.handleAdd(choice,props.onGetVolcName());
+				}	
 		    }
 	
 	};
-
+	useEffect(()=>{
+		if(props.selectedTags && props.selectedTags.length >0 && flag){
+		  props.handleSearch()
+		  setFlag(null)
+		}
+	  },[props.selectedTags])
 	const BackToEruption = (event) =>{
 		props.onBack(event);
 	}
@@ -293,8 +303,9 @@ for(let i=0;i<Vol.length;i++){
 		<div>
 		<Line 
 		data={AFEdata}
-		height={200}
-		width={200}
+
+		height={180}
+		
 		options ={opt}
 		/>
 		</div>
@@ -305,5 +316,4 @@ for(let i=0;i<Vol.length;i++){
 		
 	);
 }
-
 export default AFEtimeGraph;

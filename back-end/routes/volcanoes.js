@@ -239,7 +239,6 @@ router.get("/post_eruption_yearsBP",async(req,res)=>{
     }
     ]).then(eruptions=>{
       eruptions = eruptions.filter(e=>e.difference!= null && e.difference<0)
-      console.log(eruptions)
       return res.status(200).send(eruptions[0])
     })
     .catch(err=> res.status(400).send(err))
@@ -284,8 +283,6 @@ router.get("/afes_by_id", (req, res) => {
   let type = req.query.type
   let afeIds = req.query.id
 
-  console.log("req.query.id", req.query.id)
-
   if (type === "array") {
       let ids = req.query.id.split(',');
       afeIds = [];
@@ -294,7 +291,6 @@ router.get("/afes_by_id", (req, res) => {
       })
   }
 
-  console.log("afeIds:", afeIds)
 
   AFE.find({ 'id': { $in: afeIds } })
       .exec((err, afes) => {
@@ -312,7 +308,6 @@ router.get("/afes_by_volcano",(req,res) => {
         if(err){
           res.status(400).send(err)
         }else{
-          console.log(volc_found[0].volc_num)
           res.status(200).send(afe_found)
         }
       })
@@ -365,7 +360,6 @@ router.get("/samples_by_id", (req, res) => {
   let type = req.query.type
   let sampleIds = req.query.id
 
-  console.log("req.query.id", req.query.id)
 
   if (type === "array") {
       let ids = req.query.id.split(',');
@@ -375,7 +369,6 @@ router.get("/samples_by_id", (req, res) => {
       })
   }
 
-  console.log("sampleIds:", sampleIds)
 
   Sample.find({ 'id': { $in: sampleIds } })
       .exec((err, samples) => {
@@ -407,7 +400,6 @@ router.get("/particles_by_id", (req, res) => {
   let type = req.query.type
   let particleIds = req.query.id
 
-  console.log("req.query.id", req.query.id)
 
   if (type === "array") {
       let ids = req.query.id.split(',');
@@ -416,8 +408,6 @@ router.get("/particles_by_id", (req, res) => {
           return item
       })
   }
-
-  console.log("particleIDs", particleIds)
 
   Particle.find({ 'id': { $in: particleIds } })
       .exec((err, particles) => {

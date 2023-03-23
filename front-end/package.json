@@ -73,6 +73,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "deploy": "pm2 start ./server.sh --name volcash-front",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

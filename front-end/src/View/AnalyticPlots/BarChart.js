@@ -26,7 +26,6 @@ const BarChart = (props) =>{
 		.then(response => {
 		  if(response.data.success){
 		    setAFEs(response.data.afes)
-		    console.log(response.data.afes)
 		  } else{
 		    alert("Failed to fetch data")
 		  }
@@ -54,11 +53,7 @@ const BarChart = (props) =>{
 	for(var key in eruptiveStyleList) {
 		eruptiveArray.push(key)
 	}
-
-	console.log(eruptiveArray)
 	
-	
-
 	
 	let AFE_eruptive = {}
 	let AFE_Table = {} 
@@ -104,10 +99,6 @@ const BarChart = (props) =>{
 	
 	data = []
 
-	
-
-
-	console.log(eruptive_basicComponent)
 
 	for(var k in eruptive_basicComponent['Lava fountaining']){
 		let x = []
@@ -130,8 +121,6 @@ const BarChart = (props) =>{
 			}
 		})
 	}
-
-	console.log(data)
 
 
 

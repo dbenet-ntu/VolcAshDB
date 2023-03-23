@@ -35,14 +35,12 @@ const OverviewPlot = () =>{
 		
 		axios.get(`${proxy}/volcanoes/getAFE`)
 		.then(data =>{
-
 		  console.log(data.data.afes)
 		}).catch(err=> console.log(err))
 
 		axios.get(`${proxy}/volcanoes/getParticles`)
 		.then(data =>{
 			setParArray(data.data['particles']) 
-			console.log(data.data['particles'])
 		})
 
 		axios.get(`${proxy}/volcanoes/getEruptions`)

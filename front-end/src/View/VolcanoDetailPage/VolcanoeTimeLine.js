@@ -18,27 +18,23 @@ import AFEtimeLineForYearBP from './AFETimeLineForYearBP';
 
 
 
-const VolcanoTimeLine = ({vol}) => {
+const VolcanoTimeLine = (props) => {
   const proxy = constants.PROXY
   const [eruptions,setEruptions] = useState([])
   const [volcanoes, setVolcanoes] = useState([]);
   const [c,setC] = useState(0)
   const [AFE,setAFE] = useState([])
   const [AFEData,setAFEData] = useState([])
+  const [EruptionData,setEruptionData] = useState([])
+
 
 
 
       useEffect(() =>{
-      axios.get(`${proxy}/volcanoes/getAFE`)
-          .then(data =>{
-            setAFE(data.data.afes)
-          }).catch(err=>console.log(err))
-
-
 
       axios.get(`${proxy}/volcanoes/getEruptions`)
       .then(data =>{
-        setEruptions(data.data['eruptions'])
+       setEruptions(data.data['eruptions'])
       })
       axios.get(`${proxy}/volcanoes/getVolcanoes2`)
 
@@ -49,18 +45,19 @@ const VolcanoTimeLine = ({vol}) => {
               alert("Failed to fetch data")
             }
           })	
+
+          axios.get(`${proxy}/volcanoes/getAFE`)
+          .then(data =>{
+            setAFE(data.data.afes)
+          }).catch(err=>console.log(err))
          
 	},[])
-  // for(let i =0;i<volcanoes.length;i++){
-  //   if(parseInt(pathArray[2]) === volcanoes[i].id ){
-  //     vol = volcanoes[i].volc_name;
-  //     break;
-  //   }
-  // }
+
+
 
 let volc_num = 0
   for(let i=0;i<volcanoes.length;i++){
-      if(volcanoes[i].volc_name === vol){
+      if(volcanoes[i].volc_name === props.vol){
         volc_num = volcanoes[i].volc_num
       }
   }
@@ -80,12 +77,12 @@ setAFEData(a);
 },[AFE])
   
 
-  
+
 
 let TaalEruptionYear = [];
 try{
 for(let i=0;i<eruptions.length;i++){
-  if(eruptions[i]['volc_name'] === vol && eruptions[i]['ed_stime'] && eruptions[i]['ed_etime'] ){
+  if(eruptions[i]['volc_name'] === props.vol && eruptions[i]['ed_stime'] && eruptions[i]['ed_etime'] ){
   let s = eruptions[i]['ed_stime'].substr(0,4) + '.' + eruptions[i]['ed_stime'].substr(5,7);
   let e = eruptions[i]['ed_etime'].substr(0,4) + '.' + eruptions[i]['ed_etime'].substr(5,7);
 
@@ -100,11 +97,12 @@ for(let i=0;i<eruptions.length;i++){
 }
 }
 catch{
+
   for(let i=0;i<eruptions.length;i++){
-    if(eruptions[i]['volc_name'] === vol && eruptions[i]['ed_stime'] && eruptions[i]['ed_etime'] ){
+    if(eruptions[i]['volc_name'] === props.vol && eruptions[i]['ed_yearsBP'] && eruptions[i]['ed_yearsBP'] ){
     let s = eruptions[i]['ed_yearsBP'];
     let e = eruptions[i]['ed_yearsBP_unc'];
-  
+    
       if(parseFloat(s) !== parseFloat(e)){
       TaalEruptionYear.push({s:parseFloat(s),e:parseFloat(e)})
       }
@@ -117,10 +115,9 @@ catch{
 }
 
 
+
 const TaalData = [];
 
-
-let check = 0;
 
 
 let EndYearData =[];
@@ -164,7 +161,7 @@ const [gData,setgData] = useState([]);
 
 
   const onGetData = (yD,yU) =>{
-    if(vol !== 'Toba'){
+    if(props.vol !== 'Toba' && props.vol !== 'On-take' && props.vol !== 'Kelut' && props.vol !== 'Chillán, Nevados de' && props.vol !== 'Soufrière Guadaloupe' && props.vol!== 'St. Helens' ){
     let list = [];
 
     for(let i = Math.floor(yD);i<=Math.floor(yU);i++){
@@ -181,7 +178,7 @@ const [gData,setgData] = useState([]);
     }
     else {
       let list = [];
-    for(let i = Math.floor(yD);i>=Math.floor(yU);i-=100){
+    for(let i = Math.floor(yD);i<=Math.floor(yU);i+=100){
       list.push(i);
     }
     setList([...list]);
@@ -220,22 +217,33 @@ const getDummyData = () =>{
   }
 
 
+
+
 const redirectPage = () =>{
   
 }
+
 let OverviewTL;
-if (vol !== 'Toba'){
+// const [EruptionOption,setEruptionOption] = useState(OverviewTL);
+// let AFETL ;
+
+
+
+// let OverviewTL;
+
+if (props.vol !== 'Toba' && props.vol !== 'On-take' && props.vol !== 'Kelut' && props.vol !== 'Chillán, Nevados de' && props.vol !== 'Soufrière Guadaloupe' && props.vol!== 'St. Helens' ){
    OverviewTL = <OverviewTimeLine 
-  onPassVolcName = {() =>{return vol}}
+  onPassVolcName = {() =>{return props.vol}}
     onPassData = {onGetData}
     onGetTaalData = {() =>{return TaalData}}
     onGetTaalEruptionEndYear = {PassEndYear}
     onGetDummyAFEData = {getDummyData}
+ 
   />;
 }
 else{
   OverviewTL = <EruptionTimeLineForYearBP
-  onPassVolcName ={() =>{return vol}}
+  onPassVolcName ={() =>{return props.vol}}
   onPassData = {onGetData}
   onGetTaalData = {PassTaalData}
   onGetTaalEruptionEndYear = {PassEndYear}
@@ -261,49 +269,56 @@ else{
   const [EruptionOption,setEruptionOption] = useState(OverviewTL);
   
   let AFETL ;
-  if(vol !== 'Toba'){
+  if(props.vol !== 'Toba' && props.vol !== 'On-take' && props.vol !== 'Kelut' && props.vol !== 'Chillán, Nevados de' && props.vol !== 'Soufrière Guadaloupe' && props.vol!== 'St. Helens' ){
     AFETL = <AFEtimeGraph
+    tagsRef ={props.tagsRef} 
+    handleSearch={props.handleSearch} 
+    selectedTags={props.selectedTags}
     ll = {AddLable}
     dt = {AddGraphData}
     onGetTaalData = {()=>{return TaalData}}
     onGetTaalEruptionEndYear = {PassEndYear}
     onGetAFEData = {getDummyData}
     onGetVolcNum = {()=>{return volc_num}}
-    onGetVolcName = {()=>{return vol}}
+    onGetVolcName = {()=>{return props.vol}}
     />
   }
   else{
     AFETL = <AFEtimeLineForYearBP
+    tagsRef ={props.tagsRef} 
+    handleSearch={props.handleSearch} 
+    selectedTags={props.selectedTags}
     ll = {AddLable}
     dt = {AddGraphData}
     onGetTaalData = {()=>{return TaalData}}
     onGetTaalEruptionEndYear = {PassEndYear}
     onGetAFEData = {getDummyData}
     onGetVolcNum = {()=>{return volc_num}}
-    onGetVolcName = {()=>{return vol}}
+    onGetVolcName = {()=>{return props.vol}}
     />
   }
-  
+ 
 const ChangeGraph = (choice) => {
-  if(choice === 'overview' && vol === 'Toba'){
+  if(choice === 'overview' && props.vol === 'Toba' || props.vol === 'On-take' || props.vol === 'Kelut' || props.vol === 'Chillán, Nevados de' || props.vol === 'Soufrière Guadaloupe' || props.vol === 'St. Helens' ){
     setEruptionOption(<EruptionTimeLineForYearBP
-      onPassVolcName ={() =>{return vol}}
+      onPassVolcName ={() =>{return props.vol}}
       onPassData = {onGetData}
       onGetTaalData = {PassTaalData}
       onGetTaalEruptionEndYear = {PassEndYear}
       onGetDummyAFEData = {getDummyData}
     />);
   }
-  else if(choice === 'decade' && vol === 'Toba'){
+  else if(choice === 'decade' && props.vol === 'Toba'){
 
   }
   else if(choice === 'overview' ){
     setEruptionOption(<OverviewTimeLine 
-      onPassVolcName ={() =>{return vol}}
+      onPassVolcName ={() =>{return props.vol}}
       onPassData = {onGetData}
       onGetTaalData = {PassTaalData}
       onGetTaalEruptionEndYear = {PassEndYear}
       onGetDummyAFEData = {getDummyData}
+
     />);
   }  
   else if(choice === 'decade'){
@@ -318,24 +333,19 @@ const ChangeGraph = (choice) => {
   }
   
 }
-let imgPath
-volcanoes.map(volc=>(volc.volc_name == vol?(imgPath = volc.imgURL):null))
-    return (
-      <div>
-            <div className="Row1">
-                <div className = "infoDisplay" style={{marginTop:"50px"}}> 
-                    <h1>Name: {vol}</h1>
-                    <h1>Volcano Number: {volc_num}</h1>
-                    <h1>Latest Eruption: {2022}</h1>
-                </div>
-                <div className = "giantImage">
-                  <img src= {`${proxy}/${imgPath}`} />
-                </div>
-            </div>
-            <div>
-              <div style={{marginTop:"20px"}}>
+// let imgPath
+
+// volcanoes.map(volc=>(volc.volc_name == vol?(imgPath = volc.imgURL):null))
+
+
+      return (
+      <div style = {{width:(7.2/10)*window.screen.availWidth}}>  
+          
+            <div style = {{width:'100%'}}>
+              {/* <div>
                 <MenuDropDown onChangeGraph = {ChangeGraph} />
-              </div>
+              </div> */}
+              
                 {EruptionOption}
             </div>
             <div >

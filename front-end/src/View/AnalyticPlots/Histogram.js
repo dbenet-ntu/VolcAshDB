@@ -14,7 +14,6 @@ var variableData = ["convexity","rectangularity","elongation","roundness","circu
 const Histogram = (props) =>{
 	// let mesurement = []
 	// mesurement = require("/Users/vinhkhaitruong/Desktop/EOS Project /front-end/src/sample.json");
-	// console.log(mesurement)
 	Chart.register(...registerables);
 	const [parArray,setParArray] = useState([])
 	const [volTable,setVolTable] = useState({})
@@ -45,7 +44,6 @@ const Histogram = (props) =>{
 			}
 		}
 	}
-	console.log(Data)
 
 	
 	let variable = histogramVariable;
@@ -74,9 +72,6 @@ const Histogram = (props) =>{
 		return histogramEsential;
 	}
 
-	
-
-	console.log(Data)
 	if(mode === 'Overview'){
 		let d = [];
 		for(let i=0;i<Data.length;i++){
@@ -116,9 +111,6 @@ const Histogram = (props) =>{
 			arr_X.push(key)
 			arr_Y.push(value)
 		}
-
-
-		console.log(dict)
 
 		pData.push({
 			x: d,
@@ -171,7 +163,6 @@ const Histogram = (props) =>{
 		}
 		// volc1Data= arr1
 		// volc2Data=arr2		
-		console.log(volc1Data)
 		let max1=0;
 		let min1 =99999
 		let d1 = volc1Data;
@@ -238,9 +229,6 @@ const Histogram = (props) =>{
 			arr_Y2.push(value)
 		}
 
-
-		console.log(bin1)
-		console.log(bin2)
 		// pData.push({
 		// 	x: volc1Data,
 		// 	type:'histogram',
@@ -306,7 +294,6 @@ const Histogram = (props) =>{
 		})
 
 	}
-	//console.log(pData)
 	const doubleClick = () =>{
 		// props.onPassZoomInBinaryPlot([xAxis,yAxis,essentialVariable]);
 		 props.onPassZoomMode([mode,histogramVariable],"histogramPlot");

@@ -10,11 +10,14 @@ import DropDownForEssentialVariable from '../NewAnalyticPlots/DropDownForEssenti
 import DropDownForSubType from './DropDownSubType';
 import TernaryPlot from './TernaryPlot';
 import Histogram from './Histogram';
+import ComparativePieChart from './ComparativePieChart';
+import BigComparativePieChart from './BigComparativePieChart';
 import DropDownForTernary from './DropDownForTernary';
+import PCA from './PCA';
 const axios = require('axios')
 
 // import './NewDashBoardStyling.css'
-
+var variableData = ["convexity","rectangularity","elongation","roundness","circularity","eccentricity_moments","eccentricity_ellipse","solidit","aspect_rat","compactness","circ_rect","comp_elon","circ_elon","rect_comp","contrast","dissimilarity","homogeneity","energy","correlation","asm","blue_mean","blue_std","blue_mode","green_mean","green_std","green_mode","red_mean","red_std","red_mode"];
 let sample = ['CV_DB1','KEL_DB2','KEL_DB3','MEA_DB1','MEA_DB2','SOG_DB1','SOG_DB2','CIN_DB15','CIN_DB2','ONT_DB1','PIN_DB1','STH_DB1','LAP_DB1']
 let dict = {}
 let MagmaCompos = {}
@@ -59,6 +62,8 @@ const Dashboard = () =>{
 	const [AFE,setAFE] = useState([])
 	const [ternary,setTernary] = useState('volc_name')
 
+	let w = (25/100)*window.screen.width
+
 	useEffect(() =>{
 		
 		axios.get(`${proxy}/volcanoes/getAFE`)
@@ -89,7 +94,11 @@ const Dashboard = () =>{
 			setVolTable(vols)
 		})
 
-
+		axios.get('http://127.0.0.1:5000/plots').then(
+			data =>{
+				console.log(data)
+			}
+		)
 
 	},[])
 
@@ -177,7 +186,7 @@ const Dashboard = () =>{
 
 		<div style ={{backgroundColor:'white'}}>
 
-		<div style = {{textAlign:'center',paddingTop:'50px',paddingBottom:'50px'}}>
+		<div style = {{textAlign:'center',paddingTop:'10px',paddingBottom:'0px'}}>
 			<h1>Whole Database</h1>
 		</div>
 				{/* <div style={{display:"flex",justifyContent:"center"}}>
@@ -186,27 +195,37 @@ const Dashboard = () =>{
 			
 
 			<div className = 'pieChart' style ={{ display: 'flex' }}>
-				<div >
+				<div style = {{border:'2px solid #0c4aad'}}>
 				<PieChart onGetLegendSize = {() =>{return legendSize }} onGetSide = {() =>{return side }} onGetData={getData} onGetPieChartVariable={ () => {return 'volc_name'} } />
 				</div>
 
-				<div >
+				<div style = {{border:'2px solid #0c4aad'}}>
 				<PieChart onGetLegendSize = {() =>{return legendSize }} onGetSide = {() =>{return side }} onGetData={getData} onGetPieChartVariable={ () => {return 'main_type'} } />
 				</div>
 
-				<div >
+				<div style = {{border:'2px solid #0c4aad'}}>
 				<PieChart onGetLegendSize = {() =>{return legendSize }} onGetSide = {() =>{return side }} onGetData={getData} onGetPieChartVariable={ () => {return 'eruptive_style'} } />
 				</div>
 			</div>
 
-			<DropDownForTernary onPassTernary = {PassTernary}  />
-			<div>
+			<div style = {{display:'flex', marginTop:'20px'}}>
+
+			
+			<div style = {{margin:'auto',border:'2px solid #0c4aad'}}>
 				<TernaryPlot onGetSide = {() => {return [600,800]} } onGetData = {getData} onGetVariable = {() =>{return ternary}} />
+			</div>
+
+			<div style = {{width: (4.5/10)*window.screen.width, margin:'auto', border:'2px solid #0c4aad' }}>
+				<PCA/>
+			</div>
+
+			
+
 			</div>
 
 		</div>
 
-			<div style={{textAlign:"center",paddingTop:'50px',paddingBottom:'50px'}}>
+			<div style={{textAlign:"center",paddingTop:'50px',paddingBottom:'50px',backgroundColor:'white'}}>
 				<h1>Comparative Histogram Plots</h1>
 			</div>
 
@@ -218,8 +237,10 @@ const Dashboard = () =>{
 				<div>
 					<h2>Compare Volcano</h2>
 				</div>
-				<Histogram  onGetSide = {() =>{return [600,800] }} onGetAFE = {getAFE} onGetData = {getData} onGetVariable = { () => {return 'volc_name'}  } />
 
+				
+				<Histogram  onGetSide = {() =>{return [600,800] }} onGetAFE = {getAFE} onGetData = {getData} onGetVariable = { () => {return 'volc_name'}  } />
+			
 			</div>
 
 			<div>
@@ -252,7 +273,7 @@ const Dashboard = () =>{
 
 
 
-				<div style = {{ display: 'flex', padding:'20px' }}>
+				{/* <div style = {{ display: 'flex', padding:'20px' }}>
 					<div style = {{ paddingLeft:'25px' }}>
 		
 					<DropDownForEssentialVariable onPassEssential = {onPassEssential}/>
@@ -273,7 +294,7 @@ const Dashboard = () =>{
 
 				<div> 
 					<SunBurst onGetLegendSize = {() =>{return legendSize }} onGetSide = {() =>{return side }} onGetData={getData} onGetPieChartVariable={getPieChartVariable} onGetEssential ={getEssential} onGetMainType={getMainType} onGetSubType={getSubType} onGetAttribute1={getAttribute1} onGetAttribute2={getAttribute2}/>
-				</div>
+				</div> */}
 				
 			</div>
 		</div>

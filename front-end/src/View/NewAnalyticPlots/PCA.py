@@ -26,8 +26,10 @@ import plotly.express as px
 import matplotlib.image as mpimg
 # %matplotlib inline
 import matplotlib as mpl
+import io
+from flask import Flask, send_file, make_response,Response
 mpl.rcParams['figure.dpi'] = 300
-
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
 import sklearn
@@ -53,7 +55,8 @@ cwd = '/content/drive/Othercomputers/My iMac/Desktop/leica_MF'
 # 	os.mkdir('./results')
 
 # mf = pd.read_csv('./results/qia2.csv', index_col = 0)
-mf = pd.read_csv('/content/qia_relabeled.csv', index_col = 0)
+
+mf = pd.read_csv('/Users/vinhkhaitruong/Downloads/Volcanic-Ash-App-master-2/front-end/src/View/NewAnalyticPlots/PCA/qia_relabeled (2).csv', index_col = 0)
 mf = mf.loc[mf.index.notna()] # to remove the embedded headers between samples
 mf.index = mf.index.astype(str)
 print(mf.columns)
@@ -62,7 +65,7 @@ mf.loc[:,'convexity':'value_mode'] = mf.loc[:,'convexity':'value_mode'].astype(f
 # adds relevant fields such as volcano name, magma composition, etc.
 mf = add_basic_volcano_info(mf, True)
 
-df = mf.copy() # -> to keep an unchanged copy
+df = mf.copy() # -> to keep an unchanged cop
 
 #df.to_csv('./dataset_process_results/df_processed2.csv')
 
@@ -87,12 +90,26 @@ juvenile['Y_label'] = Y_label.values
 
 # Initialize
 model = pca(normalize=False, n_components=10)
-
+# print(Y_label.values)
 # Fit transform and include the column labels and row labels
 results = model.fit_transform(Xs.values, col_labels=df.loc[:,'convexity':'value_mode'].columns, row_labels=Y_label.values)
-
+# print(Xs.values)
+# print(Xs.values[1])
+# print(Xs.values[2])
 # Scatter plot with loadings
-fig, ax = model.biplot(alpha_transparency=0.5)
+
+# print(df.loc[:,'convexity':'value_mode'])
+# print(results)
+PCA1 = []
+PCA2 = []
+
+# for i in range(len(results)):
+#     if results.loc[:,'PC'][i] == 'PC1':
+#         PCA1.append(results.loc[:,'PC'][i])
+
+print(results['PC']['PC1'])
+print(results['PC']['PC2'])
+pca1, ax = model.biplot(alpha_transparency=0.5)
 # fig.savefig('./pca/biplot.svg')
 
 # This is to save the data in csv files, but only pd.dfs! 
@@ -112,17 +129,33 @@ from IPython.display import display
 df2 = model.results['topfeat']
 # df2.to_csv('./pca/loading.csv')
 
-fig, ax = model.scatter(PC = [0,1], alpha_transparency=0.8)
-fig.set_size_inches(10, 5)
+fig1, ax = model.scatter(PC = [0,1], alpha_transparency=0.8)
+fig1.set_size_inches(10, 10)
+# print(pca)
+# print(fig1)
 # fig.savefig('./pca/scatter_pc0_pc1.svg')
 
-fig, ax = model.scatter(PC = [0,2], title = '', alpha_transparency=0.8)
-fig.set_size_inches(10, 5)
+fig2, ax = model.scatter(PC = [0,2], title = '', alpha_transparency=0.8)
+fig2.set_size_inches(10, 5)
 # fig.savefig('./pca/scatter_pc0_pc2.svg')
 
 # Make plot with parameters: set cmap to None and label and legend to False. Only directions will be plotted.
-fig, ax =model.biplot(cmap=None, label=False, legend=False, title='')
-fig.set_size_inches(8, 4)
+fig3, ax =model.biplot(cmap=None, label=False, legend=False, title='')
+fig3.set_size_inches(8, 4)
 # fig.savefig('./pca/arrows.svg')
 
+output = io.BytesIO()
+FigureCanvas(fig1).print_png(output)
 #model.biplot3d()
+app = Flask(__name__)
+
+print(fig)
+
+@app.route('/plots', methods=['GET'])
+def correlation_matrix():
+    # bytes_obj = do_plot()
+    return {'pca1':results['PC']['PC1'],'pca2':results['PC']['PC2']}
+
+if __name__ == '__main__':
+    app.run(host='localhost',port='5000')
+    

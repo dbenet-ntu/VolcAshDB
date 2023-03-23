@@ -15,7 +15,6 @@ import DropDownForSunBurst from './DropDownForSunBurst';
 function IntToChar(int) {
 	// 👇️ for Uppercase letters, replace `a` with `A`
 	const code = 'a'.charCodeAt(0);
-	console.log(code); // 👉️ 97
       
 	return String.fromCharCode(code + int);
       }
@@ -24,7 +23,6 @@ var crystallinity = "crystallinity"
 var alteration_degree = "hydro_alter_degree"
 function intToChar(int) {
 	const code = 'A'.charCodeAt(0);
-	console.log(code); // 👉️ 65
       
 	return String.fromCharCode(code + int);
       }
@@ -50,7 +48,6 @@ function NestedPieChart(props){
 	let side = props.onGetSide()
 	let data=props.onGetData();
 	let variable = SunBurstFinalVariable;
-	//console.log(variable)
 	//let variable= props.onGetVariable();
 	let labels =[]
 	let values=[]
@@ -100,13 +97,6 @@ function NestedPieChart(props){
 		shapeTable[variable[i].label] = {}
 		alterTable[variable[i].label] = {}
 	}
-	
-	//console.log(crysTable)
-	// for(let i=0;i<data.length;i++){
-	// 	if(data[i]['basic_component'] === 'lithic'){
-	// 		console.log(data[i]['crystalinity_and_color']);
-	// 	}
-	// }
 
 	for(let i=0;i<data.length;i++){
 		if(crysTable[data[i][main_type]]&&data[i][crystallinity]){
@@ -150,10 +140,6 @@ function NestedPieChart(props){
 		// 	alterTable['undefined'] +=1;
 	}
 
-	
-	console.log(crysTable)
-	console.log(shapeTable)
-	console.log(alterTable)
 
 	let table = {}
 	if(sunBurstDataVariable === 'crystallinity'){
@@ -245,8 +231,6 @@ function NestedPieChart(props){
 	for(let i=c;i<parents.length;i++){
 		p.push(ids[i-c])
 	}
-
-	console.log(p)
 	
 	let colors = []
 	let front = []
@@ -277,11 +261,6 @@ function NestedPieChart(props){
 
 	// }
 
-	console.log(labels)
-	console.log(parents)
-	console.log(values)
-	console.log(ids)
-
 	let d={}
 	let t = []
 	for(let i=0;i<labels.length;i++){
@@ -293,9 +272,6 @@ function NestedPieChart(props){
 		}
 	}
 
-	console.log(t)
-
-	console.log(d)
 	
 	const doubleClick = () =>{
 	

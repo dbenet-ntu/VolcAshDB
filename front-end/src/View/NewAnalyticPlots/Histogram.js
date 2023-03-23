@@ -9,6 +9,7 @@ import DropDownForHistogramEsential from '../AnalyticPlots/DropDownForHistogramE
 import DropDownForHistogramCompareEruptive from '../AnalyticPlots/DropDownForHistogramCompareEruptive';
 import SwitchBoxForHistogram from './SwitchBoxForHistogram';
 import DropDownForHistogram from './DropDownForHistogram';
+import DropDownForHistogramVariable from './DropDownForHistogramVariable';
 
 var variableData = ["convexity","rectangularity","elongation","roundness","circularity","eccentricity_moments","eccentricity_ellipse","solidit","aspect_rat","compactness","circ_rect","comp_elon","circ_elon","rect_comp","contrast","dissimilarity","homogeneity","energy","correlation","asm","blue_mean","blue_std","blue_mode","green_mean","green_std","green_mode","red_mean","red_std","red_mode"];
 var volc_name = ["Kelut","Merapi","Soufrière Guadaloupe","Chillán, Nevados de","On-take","Pinatubo","St. Helens"]
@@ -19,10 +20,10 @@ var main_type = ['juvenile','free crystal','lithic','altered material']
 var eruptive_style = ['Subplinian','Dome explosion','Lava fountaining','Phreatic','Plinian']
 
 var color_match = {
-	'juvenile':'red',
-	'lithic':'green',
-	'altered material':'orange',
-	'free crystal':'blue'
+	'juvenile':'#7F131B',
+	'lithic':'#004A2D',
+	'altered material':'#F58830',
+	'free crystal':'#006CB7'
 }
 
 const Histogram = (props) =>{
@@ -39,7 +40,9 @@ const Histogram = (props) =>{
 	const [volcToCompare1,setVolcToCompare1] = useState('Toba')
 	const [volcToCompare2,setVolcToCompare2] = useState('Soufrière Guadeloupe')
 	const [histogramEsential,setHistogramEsential] = useState('Volcanoes')
-	const[mode,setMode] = useState('Main Type');
+	const [mode,setMode] = useState('Main Type');
+	const [variableX,setVariableX] = useState('convexity')
+	const [variableY,setVariableY] = useState('convexity')
 
 
 	const PassMode = (a) =>{
@@ -57,6 +60,15 @@ const Histogram = (props) =>{
 	function GetVariableData(){
 		return variableData
 	}
+
+	const PassHistogramVariableX = (a) =>{
+		setVariableX(a)
+	}
+
+	const PassHistogramVariableY = (a) =>{
+		setVariableY(a)
+	}
+
 
 	
 	
@@ -149,7 +161,7 @@ else{
 			s = splitS[0]+'_'+splitS[2];
 		}	
 			if(Data[i]['main_type'] === t &&(Data[i][va] === histogramVariable1 || s === histogramVariable1 )){
-				d.push(Data[i]['convexity'])
+				d.push(Data[i][variableX])
 			}
 		}
 		d.sort(function(a, b){return a - b})
@@ -163,28 +175,40 @@ else{
 				min = d[i]
 			}
 		}
-		let bin = (max-min)/29
+	
+		let bin = (max-min)/20
 		let dict ={}
 		let temp = min
 		while(temp<=max-bin){
 			let w = (2*temp+bin)/2
-			dict[parseFloat(w.toFixed(8))] = 0
+			dict[parseFloat(w.toFixed(2))] = 0
 			temp += bin 
 		}
 		for(let i=0;i<d.length;i++){
 			let a = Math.floor((d[i] - min)/bin) 
 			let q = (min+(a*bin) + min + (a+1)*bin)/2
 
-			dict[parseFloat(q.toFixed(8))] +=1
+			dict[parseFloat(q.toFixed(2))] +=1
 		}
 
 		let arr_X = []
 		let arr_Y = [] 
+
+		let m = 0;
 		for(const[key,value] of Object.entries(dict)){
-			arr_X.push(key)
+			if(value !== 0){
+			arr_X.push(parseFloat(key))
 			arr_Y.push(value)
+			if(value > m){
+				m = value
+			}
+		}
 		}
 
+		for(let i=0;i<arr_Y.length;i++){
+			
+			arr_Y[i]*=(100/m)
+		}
 
 		console.log(dict)
 
@@ -198,6 +222,8 @@ else{
 		// 		},
 			
 		// })
+		console.log(arr_X)
+		console.log(arr_Y)
 		pData1.push({
 			
 			x: arr_X,
@@ -209,7 +235,7 @@ else{
 			color: color_match[t],
 		
 		},
-			type: 'scatter'
+			type: 'lines'
 			      
 		})
 	}
@@ -230,7 +256,7 @@ for(let j =0; j<main_type.length;j++){
 		s = splitS[0]+'_'+splitS[2];
 	}	
 		if(Data[i]['main_type'] === t &&(Data[i][va] === histogramVariable2 || s === histogramVariable2 )){
-			d.push(Data[i]['convexity'])
+			d.push(Data[i][variableY])
 		}
 	}
 	d.sort(function(a, b){return a - b})
@@ -244,28 +270,37 @@ for(let j =0; j<main_type.length;j++){
 			min = d[i]
 		}
 	}
-	let bin = (max-min)/29
+	let bin = (max-min)/20
 	let dict ={}
 	let temp = min
 	while(temp<=max-bin){
 		let w = (2*temp+bin)/2
-		dict[parseFloat(w.toFixed(8))] = 0
+		dict[parseFloat(w.toFixed(3))] = 0
 		temp += bin 
 	}
 	for(let i=0;i<d.length;i++){
 		let a = Math.floor((d[i] - min)/bin) 
 		let q = (min+(a*bin) + min + (a+1)*bin)/2
 
-		dict[parseFloat(q.toFixed(8))] +=1
+		dict[parseFloat(q.toFixed(3))] +=1
 	}
 
 	let arr_X = []
 	let arr_Y = [] 
+	let m = 0;
 	for(const[key,value] of Object.entries(dict)){
-		arr_X.push(key)
+		if(value > 0){
+		arr_X.push(parseFloat(key))
 		arr_Y.push(value)
+		if(value > m)
+			m = value
+		}
 	}
 
+	for(let i=0;i<arr_Y.length;i++){
+			
+		arr_Y[i]*=(100/m)
+	}
 
 	console.log(dict)
 
@@ -304,7 +339,7 @@ for(let j =0; j<main_type.length;j++){
 			let d = [];
 			for(let i=0;i<Data.length;i++){
 				if(Data[i]['eruptive_style'] === t && Data[i][va] === histogramVariable1){
-					d.push(Data[i]['convexity'])
+					d.push(Data[i][variableX])
 				}
 			}
 			d.sort(function(a, b){return a - b})
@@ -318,7 +353,7 @@ for(let j =0; j<main_type.length;j++){
 					min = d[i]
 				}
 			}
-			let bin = (max-min)/29
+			let bin = (max-min)/10
 			let dict ={}
 			let temp = min
 			while(temp<=max-bin){
@@ -377,7 +412,7 @@ for(let j =0; j<main_type.length;j++){
 		let d = [];
 		for(let i=0;i<Data.length;i++){
 			if(Data[i]['eruptive_style'] === t && Data[i][va] === histogramVariable2){
-				d.push(Data[i]['convexity'])
+				d.push(Data[i][variableY])
 			}
 		}
 		d.sort(function(a, b){return a - b})
@@ -391,7 +426,8 @@ for(let j =0; j<main_type.length;j++){
 				min = d[i]
 			}
 		}
-		let bin = (max-min)/29
+
+		let bin = (max-min)/3
 		let dict ={}
 		let temp = min
 		while(temp<=max-bin){
@@ -468,9 +504,6 @@ for(let j =0; j<main_type.length;j++){
 
 					{/* {(histogramMode === 'Compare')?(
 						<div style={{display:"flex", marginTop:"10px"}}>
-
-
-
 							<div style={{marginRight:"50px"}}>  
 							<DropDownForHistogramEsential onPassHistogramEsential = {PassHistogramEsential} />
 							</div>
@@ -498,18 +531,24 @@ for(let j =0; j<main_type.length;j++){
 		</div>	
 <div style ={{ display:'flex' }}  >
 	
-<div>
+<div style = {{margin:'auto',border:'2px solid #0c4aad'}}>
 
-<div>
+<div style = {{display:'flex'}}>
+	<div style = {{marginRight:'30px'}}>
 	<DropDownForHistogram  onPassHistogramVariable1 = {PassHistogramVariable1} onGetVariableData={() => {return varData}}/>
+	</div>
+
+	<div>
+	<DropDownForHistogramVariable onGetVariableData = {() =>{return variableData}} onPassHistogramVariableX = {PassHistogramVariableX}/>
+	</div>
 </div>
 
 <Plot
 data={pData1}
-layout={ {width: (50/100)*window.screen.width, height: side[1], title: 'Histogram',barmode: 'overlay',
+layout={ {width: (42/100)*window.screen.width,colorway: ['#00395E','#FBAB18','#F05729','#7F131B','#B51C7D','#3B180D','#646765'], height: 450, title: histogramVariable1,barmode: 'overlay',
 xaxis: {
 	title: {
-	  text: histogramVariable1 + ' frequency',
+	  text: variableX,
 	  font: {
 	    family: 'Courier New, monospace',
 	    size: 18,
@@ -532,19 +571,24 @@ xaxis: {
 />
 </div>
 
-<div>
+<div style ={{margin:'auto',border:'2px solid #0c4aad'}}>
 
-<div>
-
+<div style = {{display:'flex'}}>
+	<div style = {{marginRight:'30px'}}>
 	<DropDownForHistogram  onPassHistogramVariable2 = {PassHistogramVariable2} onGetVariableData={() => {return varData}}/>
+	</div>
+
+	<div>
+	<DropDownForHistogramVariable onGetVariableData = {() =>{return variableData}} onPassHistogramVariableY = {PassHistogramVariableY}/>
+	</div>
 </div>
 
 	<Plot
 	data={pData2}
-	layout={ {width: 720, height: side[1], title: 'Histogram',barmode: 'overlay',
+	layout={ {width: (42/100)*window.screen.width ,colorway: ['#00395E','#FBAB18','#F05729','#7F131B','#B51C7D','#3B180D','#646765'], height: 450, title: histogramVariable2,barmode: 'overlay',
 	xaxis: {
 		title: {
-		  text: histogramVariable2 + ' frequency',
+		  text: variableY,
 		  font: {
 		    family: 'Courier New, monospace',
 		    size: 18,

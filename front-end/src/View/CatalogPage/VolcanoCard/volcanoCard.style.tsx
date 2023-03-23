@@ -44,7 +44,7 @@ export const volcanoStyle = makeStyles({
         BorderStyle:"solid"
     },
     poster:{
-        borderRadius:"10px"
+        borderRadius:"10px",
     },
     loadingPoster:{
         borderRadius:"10px",
