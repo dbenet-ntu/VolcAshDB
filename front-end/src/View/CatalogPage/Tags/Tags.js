@@ -103,6 +103,15 @@ const Tags = forwardRef((props,ref) => {
     disabled:false,
     child: <Popover12/>,
     id: 12 
+  },
+  {
+    anchorEl: null,
+    oriTag: "Grain Size",
+    currentChoice: "Grain Size",
+    selected: false,
+    disabled:false,
+    child: <Popover13/>,
+    id: 13 
   }])
   const tagListRef=useRef({})
   tagListRef.current=tagList
@@ -455,6 +464,19 @@ const Tags = forwardRef((props,ref) => {
     return (
       Object.keys(tagsData).map((taglabel)=>
               tagsData[taglabel].id==12?(
+                    tagsData[taglabel].choices.map((t)=>(
+                    <MenuItem onClick={() => {
+                      handleAddLogic(t,tagsData[taglabel].id);
+                      handleMenuClose(tagsData[taglabel].id)
+                    }}> {t} </MenuItem>
+                    ))):null)
+    );
+  }
+
+  function Popover13() {
+    return (
+      Object.keys(tagsData).map((taglabel)=>
+              tagsData[taglabel].id==13?(
                     tagsData[taglabel].choices.map((t)=>(
                     <MenuItem onClick={() => {
                       handleAddLogic(t,tagsData[taglabel].id);

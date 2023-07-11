@@ -54,6 +54,7 @@ export default function VolcanoCard(props) {
             {props.info.hydro_alter_degree?<p><span style={{fontWeight:700}}>Hydrothermally Alteration Degree: </span> {props.info.hydro_alter_degree}</p>:null}
             {props.info.shape?<p><span style={{fontWeight:700}}>Shape: </span> {props.info.shape}</p>:null}
             {props.info.eruptive_style?<p><span style={{fontWeight:700}}>Eruptive Style: </span> {props.info.eruptive_style}</p>:null}
+            {typeof props.info.gsLow!="undefined" && typeof props.info.gsUp!="undefined"?<p><span style={{fontWeight:700}}>Grain Size: </span> phi{props.info.gsLow}-phi{props.info.gsUp}</p>:null}
           </div>
         </div>
         }

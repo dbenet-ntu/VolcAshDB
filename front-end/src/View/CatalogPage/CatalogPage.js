@@ -18,7 +18,7 @@ import { saveAs } from 'file-saver';
 import * as constants from '../../Constants'
 import XLSX from 'xlsx'
 import VolcanoDetailPage from '../VolcanoDetailPage/VolcanoDetailPage';
-const originalTags=['Volcano Name',"Eruptions", 'Eruptive Style','Main Type','Shape','Crystallinity','Color','Hydrothermal Alteration Degree','Juvenile Type','Lithic Type','Altered Material Type','Free Crystal Type']
+const originalTags=['Volcano Name',"Eruptions", 'Eruptive Style','Main Type','Shape','Crystallinity','Color','Hydrothermal Alteration Degree','Juvenile Type','Lithic Type','Altered Material Type','Free Crystal Type', "Grain Size"]
 function CatalogPage() {
   const proxy = constants.PROXY
   const examplePar = require("./examplePar.json")
@@ -55,7 +55,11 @@ function CatalogPage() {
       }
       Object.keys(fetchedData).map(key => {
         const data = fetchedData[key].filter(d=>{
-          var props_arr = Object.values(d).map(ele=> typeof(ele)==="string"?ele.toLowerCase():null)      
+          var props_arr = Object.values(d).map(ele=> typeof(ele)==="string"?ele.toLowerCase():null)
+          // Add logic for handling grain size
+          var grain_size_bounds = `phi${d["gsLow"]}-phi${d["gsUp"]}`
+          console.log(grain_size_bounds)
+          props_arr.push(grain_size_bounds)
           return(filter.every(elem => props_arr.includes(elem)))
         })
         dataList[key]=data;

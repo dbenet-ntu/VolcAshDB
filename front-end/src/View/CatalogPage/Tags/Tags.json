@@ -49,5 +49,10 @@
   "freeCrystalType" :{
     "id" : 12,
     "oriTag": "Free Crystal Type",
-    "choices": ["Plagioclase","Pyroxene", "Amfibole","S-group mineral","Olivine","Others"]}
+    "choices": ["Plagioclase","Pyroxene", "Amfibole","S-group mineral","Olivine","Others"]},
+  "grainSize" :{
+    "id" : 13,
+    "oriTag": "Grain Size",
+    "choices": ["phi0-phi1", "phi1-phi2", "phi2-phi3"]
+  }
 }
