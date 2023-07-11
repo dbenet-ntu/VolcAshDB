@@ -58,7 +58,6 @@ function CatalogPage() {
           var props_arr = Object.values(d).map(ele=> typeof(ele)==="string"?ele.toLowerCase():null)
           // Add logic for handling grain size
           var grain_size_bounds = `phi${d["gsLow"]}-phi${d["gsUp"]}`
-          console.log(grain_size_bounds)
           props_arr.push(grain_size_bounds)
           return(filter.every(elem => props_arr.includes(elem)))
         })
@@ -223,7 +222,6 @@ function CatalogPage() {
   let zip = new JSZip();
   async function chooseDownloadOption(option) {
     const zip_name = filterSubmit.toLowerCase().split(/[\s,]+/).join("_")
-    console.log(zip_name)
     if(option == "all-compressed"){
       await saveAs(`${proxy}/images/${constants.ORGINAL_ZIP}`)
     }else if(option == "all-original"){
