@@ -1,7 +1,2 @@
 node_modules
-back-end/images/*
-back-end/uploads/*
-back-end/test.js
-front-end/src/Constants.js
 front-end/build/*
-front-end/server.sh

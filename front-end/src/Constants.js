@@ -1,0 +1,1 @@
+export const PROXY="https://https://volcash-backend.wovodat.org"
