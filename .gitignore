@@ -2,8 +2,6 @@ node_modules
 back-end/images/*
 back-end/uploads/*
 back-end/test.js
-back-end/.env
 front-end/src/Constants.js
 front-end/build/*
 front-end/server.sh
-front-end/.env
