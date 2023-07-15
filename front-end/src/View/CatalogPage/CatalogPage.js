@@ -5,8 +5,6 @@ import {
   IconButton,
   Typography,
 } from '@material-ui/core';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import SearchIcon from '@material-ui/icons/Search';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useStyles } from './CatalogPage.styles';
@@ -18,6 +16,8 @@ import { saveAs } from 'file-saver';
 import * as constants from '../../Constants'
 import XLSX from 'xlsx'
 import VolcanoDetailPage from '../VolcanoDetailPage/VolcanoDetailPage';
+
+
 const originalTags=['Volcano Name',"Eruptions", 'Eruptive Style', "Grain Size", 'Main Type','Shape','Crystallinity','Color','Hydrothermal Alteration Degree','Juvenile Type','Lithic Type','Altered Material Type','Free Crystal Type']
 function CatalogPage() {
   const proxy = constants.PROXY
@@ -162,21 +162,6 @@ function CatalogPage() {
 
   // handle Download Button
   const [isPreparingDownload, setIsPreparingDownload] = useState()
-  const downloadOptions = [{
-    key:"filtered-compressed",
-    value: "Download Filtered Compressed Images"
-  },{
-    key:"filtered-original",
-    value: "Download Filtered Original Images (8x larger)"
-  }]
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
-  const handleOpenDownloadMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseDownloadMenu = () => {
-    setAnchorEl(null);
-  };
   const exportXLSXfile = ()=>{
     var wb = XLSX.utils.book_new()
     var trimmedParInfo = []
@@ -214,55 +199,31 @@ function CatalogPage() {
   }
   var JSZip = require("jszip");
   let zip = new JSZip();
-  async function chooseDownloadOption(option) {
+  async function handleDownloadButtonClicked(event) {
+    setIsPreparingDownload(true)
     const zip_name = filterSubmit.toLowerCase().split(/[\s,]+/).join("_")
-    if(option == "all-compressed"){
-      await saveAs(`${proxy}/images/${constants.ORGINAL_ZIP}`)
-    }else if(option == "all-original"){
-      await saveAs(`${proxy}/images/${constants.COMPRESSED_ZIP}`)
+    let imgURLArray =[]
+    let photoZip    
+    photoZip = zip.folder(`${zip_name}`)
+    let parArray
+    if(filterSubmit.length!=0){
+      parArray = searchData["Particles"]
     }else{
-      let imgURLArray =[]
-      let photoZip    
-      if(option=="filtered-compressed"){
-        photoZip = zip.folder(`compressed_${zip_name}`)
-        let parArray
-        if(filterSubmit.length!=0){
-          parArray = searchData["Particles"]
-        }else{
-          parArray = fetchedData["Particles"]
-        }
-        parArray.map(par=>{
-          let imgPath = "images/optimizedImages" + par.imgURL.slice(7)
-          imgURLArray.push(`${imgPath}`) 
-        })
-      }else if(option == "filtered-original"){
-        photoZip = zip.folder(`original${zip_name}`)
-        let parArray
-        if(filterSubmit.length!=0){
-          parArray = searchData["Particles"]
-        }else{
-          parArray = fetchedData["Particles"]
-        }
-        parArray.map(par=>{
-          imgURLArray.push(`${par.imgURL}`) 
-        })
-      }    
-      var id_counter = 1
-      for (let i = 0; i < imgURLArray.length; i++) {                                                                                          
-        await DownloadImgFromURL(imgURLArray[i],photoZip,id_counter); 
-        id_counter++
-      }
-      var parInfo = exportXLSXfile()
-      photoZip.file(`Particles_Info.xlsx`,parInfo)
-      zip.generateAsync({type:"blob"})
-            .then(function(content) {
-              if(option=="filtered-compressed")
-                saveAs(content, `compresssed_${zip_name}`)
-              else{
-                saveAs(content, `original_${zip_name}`)
-              }
-            });
+      parArray = fetchedData["Particles"]
     }
+    parArray.map(par=>{
+      let imgPath = "images/optimizedImages" + par.imgURL.slice(7)
+      imgURLArray.push(`${imgPath}`) 
+    }) 
+    var id_counter = 1
+    for (let i = 0; i < imgURLArray.length; i++) {                                                                                          
+      await DownloadImgFromURL(imgURLArray[i],photoZip,id_counter); 
+      id_counter++
+    }
+    var parInfo = exportXLSXfile()
+    photoZip.file(`Particles_Info.xlsx`,parInfo)
+    zip.generateAsync({type:"blob"})
+          .then(function(content) {saveAs(content, `${zip_name}`)});
     setIsPreparingDownload(false)
   }
 
@@ -315,34 +276,15 @@ function CatalogPage() {
               aria-controls="demo-positioned-menu"
 
               aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
               variant='contained' 
               style={{backgroundColor:"#f57c00", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:20, borderRadius:"20px", color:"white"}} 
-              onClick={(event)=>handleOpenDownloadMenu(event)} //handleOpenDownloadMenu
+              onClick={(event)=>handleDownloadButtonClicked(event)} //handleOpenDownloadMenu
             > 
               Download Images and Mesured Features
             </Button>
-            <Menu
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleCloseDownloadMenu}
-              style={{top:"45px", left:"20px"}}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-            >
-            {downloadOptions.map((option)=> <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>)}
-            </Menu>
             {isPreparingDownload?<CircularProgress style={{marginLeft:"15px", marginBottom:"-20px"}} />:null}
-            <div style={{marginTop:"10px", marginRight:"150px"}}>
-              <Typography style={{color:"red", fontSize:"15px"}}> *Note: Downloading original-sized images is not recommended for large downloads ({'>'}200 images)</Typography>
+            <div style={{marginTop:"10px", marginLeft: "70px"}}>
+              <Typography style={{color:"red", fontSize:"15px"}}> *Note: Download large number of images may take a long time.</Typography>
             </div>
           </span>
         ):null}
