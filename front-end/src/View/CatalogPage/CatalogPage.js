@@ -18,7 +18,7 @@ import { saveAs } from 'file-saver';
 import * as constants from '../../Constants'
 import XLSX from 'xlsx'
 import VolcanoDetailPage from '../VolcanoDetailPage/VolcanoDetailPage';
-const originalTags=['Volcano Name',"Eruptions", 'Eruptive Style','Main Type','Shape','Crystallinity','Color','Hydrothermal Alteration Degree','Juvenile Type','Lithic Type','Altered Material Type','Free Crystal Type', "Grain Size"]
+const originalTags=['Volcano Name',"Eruptions", 'Eruptive Style', "Grain Size", 'Main Type','Shape','Crystallinity','Color','Hydrothermal Alteration Degree','Juvenile Type','Lithic Type','Altered Material Type','Free Crystal Type']
 function CatalogPage() {
   const proxy = constants.PROXY
   const examplePar = require("./examplePar.json")
@@ -168,12 +168,6 @@ function CatalogPage() {
   },{
     key:"filtered-original",
     value: "Download Filtered Original Images (8x larger)"
-  },{
-    key:"all-compressed",
-    value: "Download All Compressed Images"
-  },{
-    key:"all-original",
-    value: "Download All Original Images (8x larger)"
   }]
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -312,44 +306,46 @@ function CatalogPage() {
           ref={tagsRef}
         />
       </div>
-      {/* <button onClick={tagsRef.current.handleAdd("a")}></button> */}
-      <div style={{marginLeft:"1000px", marginTop:"-15px", marginBottom:"10px"}}>
+      <div style={{marginRight:"-1200px", marginTop:"-15px", marginBottom:"10px"}}>
         <Button variant='contained' style={{backgroundColor:"#388e3c", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:30, borderRadius:"20px", color:"white"}} onClick={()=>handleSubmit(searchTerm.toLowerCase())}> Apply Filters</Button>
-          <Button 
-            id="demo-positioned-button"
-            aria-controls="demo-positioned-menu"
+        {filterSubmit.length!=0 && !isLoading && searchData["Particles"].length!=0?(
+          <span>
+            <Button 
+              id="demo-positioned-button"
+              aria-controls="demo-positioned-menu"
 
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            variant='contained' 
-            style={{backgroundColor:"#f57c00", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:20, borderRadius:"20px", color:"white"}} 
-            onClick={(event)=>handleOpenDownloadMenu(event)} //handleOpenDownloadMenu
-          > 
-            Download Images and Mesured Features
-          </Button>
-          <Menu
-            id="demo-positioned-menu"
-            aria-labelledby="demo-positioned-button"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleCloseDownloadMenu}
-            style={{top:"45px", left:"20px"}}
-            anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
-            }}
-          >
-          {filterSubmit.length!=0?downloadOptions.map((option)=>
-          <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>
-            ):downloadOptions.map((option,index)=>
-            index>1?
-            <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>:null)}
-          </Menu>
-          {isPreparingDownload?<CircularProgress style={{marginLeft:"15px", marginBottom:"-20px"}} />:null}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              variant='contained' 
+              style={{backgroundColor:"#f57c00", fontWeight:700, fontSize:12, height:40, marginTop:15, marginLeft:20, borderRadius:"20px", color:"white"}} 
+              onClick={(event)=>handleOpenDownloadMenu(event)} //handleOpenDownloadMenu
+            > 
+              Download Images and Mesured Features
+            </Button>
+            <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleCloseDownloadMenu}
+              style={{top:"45px", left:"20px"}}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            >
+            {downloadOptions.map((option)=> <MenuItem onClick={()=>{chooseDownloadOption(option.key); setIsPreparingDownload(true); handleCloseDownloadMenu()}}>{option.value}</MenuItem>)}
+            </Menu>
+            {isPreparingDownload?<CircularProgress style={{marginLeft:"15px", marginBottom:"-20px"}} />:null}
+            <div style={{marginTop:"10px", marginRight:"150px"}}>
+              <Typography style={{color:"red", fontSize:"15px"}}> *Note: Downloading original-sized images is not recommended for large downloads ({'>'}200 images)</Typography>
+            </div>
+          </span>
+        ):null}
       </div>
       {filterSubmit.length!=0 && !isLoading?(
         <Typography style={{ marginLeft: 25, paddingBottom: 20 }}>

@@ -13,46 +13,46 @@
     "id": 3,
     "oriTag": "Eruptive Style",
     "choices":["Subplinian", "Phreatic", "Dome explosion","Lava fountaining","Spongy","Plinian","Phreatic historical"]},
+  "grainSize" :{
+      "id" : 4,
+      "oriTag": "Grain Size",
+      "choices": ["phi0-phi1", "phi1-phi2", "phi2-phi3"]
+    },
   "mainType": {
-    "id": 4,
+    "id": 5,
     "oriTag": "Main Type",
     "choices":["Free Crystal","Altered Material","Juvenile","Lithic"]
   },
   "shape" :{
-    "id": 5,
+    "id": 6,
     "oriTag": "Shape",
     "choices":["Blocky", "Fluidal", "Microtubular","Highly vesicular","Spongy","Pumice"]},
   "crystallinity" :{
-    "id": 6,
+    "id": 7,
     "oriTag": "Crystallinity",
     "choices":["Low Crystallinity","Mid Crystallinity","High Crystallinity"]},
   "color" :{
-    "id":7,
+    "id":8,
     "oriTag": "Color",
     "choices":["Black","Transparent"]},
   "hydroAlterDegree" :{
-    "id":8,
+    "id":9,
     "oriTag": "Hydrothermal Alteration Degree",
     "choices":["None", "Slight", "Moderate","High"]},
   "juvenileType" :{
-    "id":9,
+    "id":10,
     "oriTag": "Juvenile Type",
     "choices":["Standard Juvenile","Hydrothermally Altered Juvenile"]},
   "lithicType" :{
-    "id":10,
+    "id":11,
     "oriTag": "Lithic Type",
     "choices":["Standard Lithic","Recycled Juvenile"]},
   "alteredMaterialType" :{
-    "id":11,
+    "id":12,
     "oriTag": "Altered Material Type",
     "choices":["Weathered Material", "Hydrothermally Altered Material"]},
   "freeCrystalType" :{
-    "id" : 12,
-    "oriTag": "Free Crystal Type",
-    "choices": ["Plagioclase","Pyroxene", "Amfibole","S-group mineral","Olivine","Others"]},
-  "grainSize" :{
     "id" : 13,
-    "oriTag": "Grain Size",
-    "choices": ["phi0-phi1", "phi1-phi2", "phi2-phi3"]
-  }
+    "oriTag": "Free Crystal Type",
+    "choices": ["Plagioclase","Pyroxene", "Amfibole","S-group mineral","Olivine","Others"]}
 }

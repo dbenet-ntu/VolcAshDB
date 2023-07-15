@@ -16,7 +16,7 @@ export default function Home(){
             <div className={classes.BodyContent}>
                 <Typography className={classes.BodyText}>The web-based platform Volcanic ash DataBase</Typography>
                 <div className={classes.BodyBtn}>
-                    <Button className={classes.Btn} onClick={()=> navigate("/about")}> About VolcashDB</Button>
+                    <Button className={classes.Btn} onClick={()=> navigate("/about")}> About VolcAshDB</Button>
                     <br/>
                 </div>
                 <br/>

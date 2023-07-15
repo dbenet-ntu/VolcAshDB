@@ -17,7 +17,7 @@ export default function Navigation() {
     <>
     <AppBar position='static'>
       <Toolbar> 
-        <Link to="/" className={classes.navLogo}> VolcashDB </Link>
+        <Link to="/" className={classes.navLogo}> VolcAshDB </Link>
         <div className={classes.navMenu}>
           <Button
             className={classes.navBtn}
@@ -31,7 +31,7 @@ export default function Navigation() {
             color='inherit'
             onClick={() => changeLocation('/about')}
           >
-            About VolcashDB
+            About VolcAshDB
           </Button>
           <Button
             className={classes.navBtn}

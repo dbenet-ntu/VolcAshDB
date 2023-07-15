@@ -30,79 +30,6 @@ const Tags = forwardRef((props,ref) => {
     disabled:false,
     child: <Popover3/>,
     id: 3 
-  },{
-    anchorEl: null,
-    oriTag: "Main Type",
-    currentChoice: "Main Type",
-    selected: false,
-    disabled:false,
-    child: <Popover4/>,
-    id: 4
-  },{
-    anchorEl: null,
-    oriTag: "Shape",
-    currentChoice: "Shape",
-    selected: false,
-    disabled:false,
-    child: <Popover5/>,
-    id: 5 
-  },{
-    anchorEl: null,
-    oriTag: "Crystallinity",
-    currentChoice: "Crystallinity",
-    selected: false,
-    disabled:false,
-    child: <Popover6/>,
-    id: 6 
-  },{
-    anchorEl: null,
-    oriTag: "Color",
-    currentChoice: "Color",
-    selected: false,
-    disabled:false,
-    child: <Popover7/>,
-    id: 7
-  }
-  ,{
-    anchorEl: null,
-    oriTag: "Hydrothermal Alteration Degree",
-    currentChoice: "Hydrothermal Alteration Degree",
-    selected: false,
-    disabled:false,
-    child: <Popover8/>,
-    id: 8
-  },{
-    anchorEl: null,
-    oriTag: "Juvenile Type",
-    currentChoice: "Juvenile Type",
-    selected: false,
-    disabled:false,
-    child: <Popover9/>,
-    id: 9
-  },{
-    anchorEl: null,
-    oriTag: "Lithic Type",
-    currentChoice: "Lithic Type",
-    selected: false,
-    disabled:false,
-    child: <Popover10/>,
-    id: 10 
-  },{
-    anchorEl: null,
-    oriTag: "Altered Material Type",
-    currentChoice: "Altered Material Type",
-    selected: false,
-    disabled:false,
-    child: <Popover11/>,
-    id: 11 
-  },{
-    anchorEl: null,
-    oriTag: "Free Crystal Type",
-    currentChoice: "Free Crystal Type",
-    selected: false,
-    disabled:false,
-    child: <Popover12/>,
-    id: 12 
   },
   {
     anchorEl: null,
@@ -110,8 +37,81 @@ const Tags = forwardRef((props,ref) => {
     currentChoice: "Grain Size",
     selected: false,
     disabled:false,
+    child: <Popover4/>,
+    id: 4
+  },{
+    anchorEl: null,
+    oriTag: "Main Type",
+    currentChoice: "Main Type",
+    selected: false,
+    disabled:false,
+    child: <Popover5/>,
+    id: 5
+  },{
+    anchorEl: null,
+    oriTag: "Shape",
+    currentChoice: "Shape",
+    selected: false,
+    disabled:false,
+    child: <Popover6/>,
+    id: 6
+  },{
+    anchorEl: null,
+    oriTag: "Crystallinity",
+    currentChoice: "Crystallinity",
+    selected: false,
+    disabled:false,
+    child: <Popover7/>,
+    id: 7 
+  },{
+    anchorEl: null,
+    oriTag: "Color",
+    currentChoice: "Color",
+    selected: false,
+    disabled:false,
+    child: <Popover8/>,
+    id: 8
+  }
+  ,{
+    anchorEl: null,
+    oriTag: "Hydrothermal Alteration Degree",
+    currentChoice: "Hydrothermal Alteration Degree",
+    selected: false,
+    disabled:false,
+    child: <Popover9/>,
+    id: 9
+  },{
+    anchorEl: null,
+    oriTag: "Juvenile Type",
+    currentChoice: "Juvenile Type",
+    selected: false,
+    disabled:false,
+    child: <Popover10/>,
+    id: 10
+  },{
+    anchorEl: null,
+    oriTag: "Lithic Type",
+    currentChoice: "Lithic Type",
+    selected: false,
+    disabled:false,
+    child: <Popover11/>,
+    id: 11
+  },{
+    anchorEl: null,
+    oriTag: "Altered Material Type",
+    currentChoice: "Altered Material Type",
+    selected: false,
+    disabled:false,
+    child: <Popover12/>,
+    id: 12
+  },{
+    anchorEl: null,
+    oriTag: "Free Crystal Type",
+    currentChoice: "Free Crystal Type",
+    selected: false,
+    disabled:false,
     child: <Popover13/>,
-    id: 13 
+    id: 13
   }])
   const tagListRef=useRef({})
   tagListRef.current=tagList
@@ -148,15 +148,7 @@ const Tags = forwardRef((props,ref) => {
       })
     }
   },[tagList])
-  // useEffect(()=>{
-  //   Popover1()
-  //   Popover2()
-  //   let newTagList = tagList
-  //   setTagList(newTagList)
-  // },[tagsData])
-  // useEffect(()=>{
-  //   console.log(tagsData["eruptions"])
-  // },[tagsData])
+
   const handleAdd = (choice,id, newTagList, newSelectedTags, newTags) => {
     newSelectedTags.push(choice)
     newTags.map((tag,index) =>{
@@ -169,28 +161,28 @@ const Tags = forwardRef((props,ref) => {
   };
   const disabledLogic = (choice, newTagList) =>{
     switch(choice){
-      case "Free Crystal": newTagList[11].disabled = false; newTagList[8].disabled = true; newTagList[9].disabled = true; newTagList[10].disabled = true; break;
-      case "Altered Material": newTagList[10].disabled = false; newTagList[8].disabled = true; newTagList[9].disabled = true; newTagList[11].disabled = true; break;
-      case "Juvenile": newTagList[8].disabled = false; newTagList[9].disabled = true; newTagList[10].disabled = true; newTagList[11].disabled = true; break;
-      case "Lithic": newTagList[9].disabled = false; newTagList[8].disabled = true; newTagList[10].disabled = true; newTagList[11].disabled = true; break;
-      default: newTagList[8].disabled = newTagList[9].disabled = newTagList[10].disabled = newTagList[11].disabled = false
+      case "Free Crystal": newTagList[12].disabled = false; newTagList[9].disabled = true; newTagList[10].disabled = true; newTagList[11].disabled = true; break;
+      case "Altered Material": newTagList[11].disabled = false; newTagList[9].disabled = true; newTagList[10].disabled = true; newTagList[12].disabled = true; break;
+      case "Juvenile": newTagList[9].disabled = false; newTagList[10].disabled = true; newTagList[11].disabled = true; newTagList[12].disabled = true; break;
+      case "Lithic": newTagList[10].disabled = false; newTagList[9].disabled = true; newTagList[11].disabled = true; newTagList[12].disabled = true; break;
+      default: newTagList[9].disabled = newTagList[10].disabled = newTagList[11].disabled = newTagList[12].disabled = false
     }
   }
   const handleAddLogic = (choice,id)=>{
     let newTagList = [...tagListRef.current]
     let newSelectedTags = [...selectedTagsRef.current]
     let newTags = [...tagsRef.current]
-    if(id == 4){
+    if(id == 5){
       disabledLogic(choice, newTagList)
     }else if(id == 1){
       newTagList[1].disabled = false
     }else{
-      if(!tagList[3].selected){
+      if(!tagList[4].selected){
         switch(id){
-          case 12: handleAdd("Free Crystal",4, newTagList, newSelectedTags, newTags); disabledLogic("Free Crystal", newTagList); break;
-          case 11: handleAdd("Altered Material",4, newTagList, newSelectedTags, newTags); disabledLogic("Altered Material", newTagList); break;
-          case 9: handleAdd("Juvenile",4, newTagList, newSelectedTags, newTags); disabledLogic("Juvenile", newTagList); break;
-          case 10: handleAdd("Lithic",4, newTagList, newSelectedTags, newTags); disabledLogic("Lithic", newTagList); break;
+          case 13: handleAdd("Free Crystal",5, newTagList, newSelectedTags, newTags); disabledLogic("Free Crystal", newTagList); break;
+          case 12: handleAdd("Altered Material",5, newTagList, newSelectedTags, newTags); disabledLogic("Altered Material", newTagList); break;
+          case 10: handleAdd("Juvenile",5, newTagList, newSelectedTags, newTags); disabledLogic("Juvenile", newTagList); break;
+          case 11: handleAdd("Lithic",5, newTagList, newSelectedTags, newTags); disabledLogic("Lithic", newTagList); break;
         }
       }
     }
@@ -217,14 +209,14 @@ const Tags = forwardRef((props,ref) => {
       handleRemove(newTagList[1].currentChoice,2,newTagList, newSelectedTags, newTags)
       newTagList[1].disabled = true
     }
-    if(id == 4){
-      newTagList[9].disabled = newTagList[8].disabled = newTagList[10].disabled = newTagList[11].disabled = false
-      if(tagList[8].selected || tagList[9].selected || tagList[10].selected || tagList[11].selected){
+    if(id == 5){
+      newTagList[10].disabled = newTagList[9].disabled = newTagList[11].disabled = newTagList[12].disabled = false
+      if(tagList[9].selected || tagList[10].selected || tagList[11].selected || tagList[12].selected){
         switch(choice){
-          case "Free Crystal": handleRemove(tagList[11].currentChoice,12, newTagList, newSelectedTags, newTags); break;
-          case "Altered Material": handleRemove(tagList[10].currentChoice,11, newTagList, newSelectedTags, newTags); break;
-          case "Juvenile": handleRemove(tagList[8].currentChoice,9, newTagList, newSelectedTags, newTags); break;
-          case "Lithic": handleRemove(tagList[9].currentChoice,10, newTagList, newSelectedTags, newTags); break;
+          case "Free Crystal": handleRemove(tagList[12].currentChoice,13, newTagList, newSelectedTags, newTags); break;
+          case "Altered Material": handleRemove(tagList[11].currentChoice,12, newTagList, newSelectedTags, newTags); break;
+          case "Juvenile": handleRemove(tagList[9].currentChoice,10, newTagList, newSelectedTags, newTags); break;
+          case "Lithic": handleRemove(tagList[10].currentChoice,11, newTagList, newSelectedTags, newTags); break;
         }
       }
     }
