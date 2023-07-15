@@ -23,8 +23,7 @@ npm -v
     git clone git@github.com:dbenet-ntu/Volcash-Project.git
     ```
 
-- Download `images.zip` file, upzip it and put the folder inside `back-end`.
-- Create `Constants.js` file inside `front-end/src` to set `PROXY` variable. This `PROXY` variable is the address of the back-end of the site. Inside this file, put
+- Modify `front-end/src/Constants.js` to set `PROXY` variable. This `PROXY` variable is the address of the back-end of the site.
 
     ```javascript
     export const PROXY = "http://localhost:5001"
