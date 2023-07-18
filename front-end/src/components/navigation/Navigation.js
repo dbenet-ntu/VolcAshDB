@@ -17,7 +17,7 @@ export default function Navigation() {
     <>
     <AppBar position='static'>
       <Toolbar> 
-        <Link to="/" className={classes.navLogo}> VolllcAshDB </Link>
+        <Link to="/" className={classes.navLogo}> VolcAshDB </Link>
         <div className={classes.navMenu}>
           <Button
             className={classes.navBtn}
