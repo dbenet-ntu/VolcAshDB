@@ -9,41 +9,38 @@ import {Link} from "react-router-dom"
 export default function Navigation() {
   const classes = NavigationStyles();
   const navigate = useNavigate();
-  function changeLocation(placeToGo){
-    navigate(placeToGo, { replace: true });
-    window.location.reload();
-  }
+  
   return (
     <>
     <AppBar position='static'>
       <Toolbar> 
-        <Link to="/" className={classes.navLogo}> VolcAshDB </Link>
+        <Link to="/" className={classes.navLogo}> VolcashDB </Link>
         <div className={classes.navMenu}>
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => changeLocation('/')}
+            onClick={() => navigate('/')}
           >   
             Home
           </Button>
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => changeLocation('/about')}
+            onClick={() => navigate('/about')}
           >
-            About VolcAshDB
+            About VolcashDB
           </Button>
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => changeLocation('/catalogue')}
+            onClick={() => navigate('/catalogue')}
           >
             Catalogue 
           </Button>
           <Button
             className={classes.navBtn}
             color='inherit'
-            onClick={() => changeLocation('/analytic')}
+            onClick={() => navigate('/analytic')}
           >
             Plots 
           </Button>
