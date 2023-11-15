@@ -20,7 +20,7 @@ npm -v
 - Clone Volcash github repo 
 
     ```shell
-    git clone git@github.com:dbenet-ntu/Volcash-Project.git
+    git clone git@github.com:dbenet-ntu/VolcAshDB.git
     ```
 
 - Modify `front-end/src/Constants.js` to set `PROXY` variable. This `PROXY` variable is the address of the back-end of the site.
