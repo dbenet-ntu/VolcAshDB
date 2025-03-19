@@ -1,3 +1,11 @@
+# Data access
+
+## Online service
+Our dataset can be browsed and filtered through the "Catalogue" page at [http://volcashdb.ipgp.fr/](http://volcashdb.ipgp.fr/).
+
+## Download dataset in bulk
+Our dataset is publicly accessible in bulk through the FIGSHARE repository [here].(https://figshare.com/collections/VolcAshDB_Dataset_of_classified_volcanic_ash_particle_images_and_features/7644656).
+
 # Setting up local development for Volcash for MacOS
 
 ## Install NodeJS
